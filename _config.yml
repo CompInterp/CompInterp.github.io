@@ -89,7 +89,7 @@ bing_site_verification: # out your bing-site-verification ID (Bing Webmaster)
 # -----------------------------------------------------------------------------
 
 blog_name: Composis # blog_name will be displayed in your blog page
-blog_description:  The world is compositional or God exists. - Stuart Geman
+blog_description:  The world is compositional, or God exists.  —S. Geman
 permalink: /blog/:year/:title/
 lsi: true # produce an index for related posts
 
@@ -197,6 +197,21 @@ exclude:
   - README.md
   - readme_preview/
   - vendor
+  - _posts/examples/
+  - _news/examples/
+  - _projects/examples/
+  # disable blog
+  - _posts/
+  - _pages/blog.md
+  # disable projects
+  - _projects/
+  - _pages/projects.md
+  # disable cv
+  - _pages/cv.md
+  # disable teaching
+  - _pages/teaching.md
+  # disable dropdown
+  - _pages/dropdown.md
 keep_files:
   - CNAME
   - .nojekyll
