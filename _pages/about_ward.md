@@ -1,7 +1,16 @@
 ## **Ward** Gauderis
 
-Write your biography here. Tell the world about yourself. Link to your favorite [subreddit](http://reddit.com). You can put a picture in, too. The code is already in, just name your picture `prof_pic.jpg` and put it in the `img/` folder.
+Hello!
+I'm a PhD researcher at the Computational Creativity Lab within the Artificial Intelligence Research Group at the Vrije Universiteit Brussel, supervised by Prof. Dr. Dr. Geraint Wiggins.
 
-Put your address / P.O. box / other info right below your picture. You can also disable any these elements by editing `profile` property of the YAML header of your `_pages/about.md`. Edit `_bibliography/papers.bib` and Jekyll will render your [publications page](/al-folio/publications/) automatically.
+I study **compositionality** in AI --- how explicit structure and emergent behaviour interact in intelligent systems. My work bridges symbolic and sub-symbolic AI, with a focus on models that are inherently interpretable by design and can reason and create in human-like ways.
 
-Link to your social media connections, too. This theme is set up to use [Font Awesome icons](https://fontawesome.com/) and [Academicons](https://jpswalsh.github.io/academicons/), like the ones below. Add your Facebook, Twitter, LinkedIn, Google Scholar, or just disable all of them.
+**How can the _compositional design_ of a model's structure improve its _compositional behaviour_?**
+
+My PhD project, Q-CHARM, explores this question by distinguishing between the architecture of a model (its **compositional design**) and the structure that emerges during learning (its **compositional behaviour**). The goal is to uncover how architectural inductive biases can support interpretability, generalisation, and creative reasoning. Learn more about me [here](https://wardgauderis.github.io/)!
+
+<!-- prettier-ignore-start -->
+*[compositionality]: Compositionality is the algebraic capacity to understand and produce novel combinations from known components.
+
+*[inherently]: read: compositionally
+<!-- prettier-ignore-end -->

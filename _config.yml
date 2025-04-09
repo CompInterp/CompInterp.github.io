@@ -11,7 +11,7 @@ contact_note: >
 description: > # the ">" symbol means to ignore newlines until "footer_text:"
   A compositional perspective to bridge model design and interpretability in AI.
 footer_text:
-keywords: mechanistic interpretability, compositional AI, category theory, tensor networks, 
+keywords: mechanistic interpretability, compositional AI, category theory, tensor networks,
   neural networks, deep learning, machine learning, AI safety, AI alignment, # add your own keywords or leave empty
 lang: en # the language of your site (for example: en, fr, cn, ru, etc.)
 icon: chi_creature.png # the emoji used as the favicon (alternatively, provide image name in /assets/img/)
@@ -89,7 +89,7 @@ bing_site_verification: # out your bing-site-verification ID (Bing Webmaster)
 # -----------------------------------------------------------------------------
 
 blog_name: Composis # blog_name will be displayed in your blog page
-blog_description:  The world is compositional, or God exists.  —S. Geman
+blog_description: The world is compositional, or God exists.  —S. Geman
 permalink: /blog/:year/:title/
 lsi: true # produce an index for related posts
 

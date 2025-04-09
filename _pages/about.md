@@ -2,17 +2,14 @@
 layout: about
 title: about
 permalink: /
-subtitle: <a href='#'>Affiliations</a>. Address. Contacts. Motto. Etc. # TODO: add VUB + UA
+subtitle: # TODO: add VUB + UA
 
 profile:
   align: right
-  image: chi_creature.png # TODO: better image
+  image: meme/summertime.jpg # TODO: better image
   image_circular: false # crops the image to make it circular
-  more_info: > # TODO: description
-    <p>555 your office number</p>
-    <p>123 your address street</p>
-    <p>Your City, State 12345</p>
-
+  more_info: >
+    Our latest <a href="https://www.youtube.com/watch?v=yUGZVPJlvzY">hit single</a>
 selected_papers: true # includes a list of papers marked as "selected={true}"
 social: true # includes social icons at the bottom of the page
 
@@ -26,12 +23,14 @@ latest_posts:
   scrollable: true # adds a vertical scroll bar if there are more than 3 new posts items
   limit: 3 # leave blank to include all the blog posts
 ---
-<!-- TODO: about page (steal from FWO) -->
-<!-- TODO: link video et al. more clearly -->
+
 <!-- TODO: meme collection page -->
 <!-- TODO: add book as project, or better, separate page -->
-Write your biography here. Tell the world about yourself. Link to your favorite [subreddit](http://reddit.com). You can put a picture in, too. The code is already in, just name your picture `prof_pic.jpg` and put it in the `img/` folder.
 
-Put your address / P.O. box / other info right below your picture. You can also disable any of these elements by editing `profile` property of the YAML header of your `_pages/about.md`. Edit `_bibliography/papers.bib` and Jekyll will render your [publications page](/al-folio/publications/) automatically.
+The **CompInterp** approach to interpretability treats weights and data as a unified modality to provide a compositional perspective on model design, analysis, and manipulation. By combining tensor and neural network paradigms, our $\chi$-nets pave the way for inherently interpretable AI without sacrificing performance.
 
-Link to your social media connections, too. This theme is set up to use [Font Awesome icons](https://fontawesome.com/) and [Academicons](https://jpswalsh.github.io/academicons/), like the ones below. Add your Facebook, Twitter, LinkedIn, Google Scholar, or just disable all of them.
+**$\chi$-nets** are compositional by design, both in how they are built and in the representations they learn. Their architecture enables mathematical guarantees and weight-based subcircuit analysis, grounding interpretability in formal (de)compositions rather than post-hoc activation-based approximations.
+
+We're currently scaling CompInterp methods to CNNs and transformers by leveraging their specialised low-rank structure. Learn more about it in our [latest talk](https://www.youtube.com/watch?v=yUGZVPJlvzY)!
+
+*[inherently]: read: compositionally

@@ -14,16 +14,13 @@ profiles:
     content: about_ward.md # TODO: complete profile
     image_circular: false # crops the image to make it circular
     more_info: >
-      W
-      <p>555 your office number</p>
-      <p>123 your address street</p>
-      <p>Your City, State 12345</p>
+      <a href="https://wardgauderis.github.io/">wardgauderis.github.io</a>
+      <p>Brussels, Belgium</p>
   - align: left
     image: thomas.png
     content: about_thomas.md # TODO: complete profile
     image_circular: false # crops the image to make it circular
     more_info: >
-      <p>555 your office number</p>
-      <p>123 your address street</p>
-      <p>Your City, State 12345</p>
+      <a href="https://tdooms.github.io/">tdooms.github.io</a>
+      <p>Antwerp, Belgium</p>
 ---
