@@ -7,7 +7,7 @@ I study **compositionality** in AI --- how explicit structure and emergent behav
 
 **How can the _compositional design_ of a model's structure improve its _compositional behaviour_?**
 
-My PhD project, Q-CHARM, explores this question by distinguishing between the architecture of a model (its **compositional design**) and the structure that emerges during learning (its **compositional behaviour**). The goal is to uncover how architectural inductive biases can support interpretability, generalisation, and creative reasoning. Learn more about me [here](https://wardgauderis.github.io/)!
+My PhD project, Q-CHARM, explores this question by distinguishing between the architecture of a model (its **compositional design**) and the structure that emerges during learning (its **compositional behaviour**). The goal is to uncover how architectural inductive biases can support interpretability, generalisation, and creative reasoning. Learn more about my work [here](https://wardgauderis.github.io/)!
 
 <!-- prettier-ignore-start -->
 *[compositionality]: Compositionality is the algebraic capacity to understand and produce novel combinations from known components.
