@@ -33,4 +33,8 @@ The **CompInterp** approach to interpretability treats weights and data as a uni
 
 We're currently scaling CompInterp methods to CNNs and transformers by leveraging their specialised low-rank structure. Learn more about it in our [latest talk](https://www.youtube.com/watch?v=yUGZVPJlvzY)!
 
+<!-- prettier-ignore-start -->
+*[compositionality]: Compositionality is the algebraic capacity to understand and produce novel combinations from known components.
+
 *[inherently]: read: compositionally
+<!-- prettier-ignore-end -->
