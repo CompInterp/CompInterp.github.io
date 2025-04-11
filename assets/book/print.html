@@ -29,8 +29,9 @@
 <script async="" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
 <script>
-            var path_to_root = "";
-            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+            const path_to_root = "";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
         </script>
 
 <script src="toc.js"></script>
@@ -40,8 +41,8 @@
 
 <script>
             try {
-                var theme = localStorage.getItem('mdbook-theme');
-                var sidebar = localStorage.getItem('mdbook-sidebar');
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
 
                 if (theme.startsWith('"') && theme.endsWith('"')) {
                     localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
@@ -54,7 +55,8 @@
         </script>
 
 <script>
-            var theme;
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
             try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
             if (theme === null || theme === undefined) { theme = default_theme; }
             const html = document.documentElement;
@@ -65,8 +67,8 @@
 <input class="hidden" id="sidebar-toggle-anchor" type="checkbox"/>
 
 <script>
-            var sidebar = null;
-            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
             if (document.body.clientWidth >= 1080) {
                 try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
                 sidebar = sidebar || 'visible';
@@ -99,6 +101,7 @@
 <i class="fa fa-paint-brush"></i>
 </button>
 <ul aria-label="Themes" class="theme-popup" id="theme-list" role="menu">
+<li role="none"><button class="theme" id="default_theme" role="menuitem">Auto</button></li>
 <li role="none"><button class="theme" id="light" role="menuitem">Light</button></li>
 <li role="none"><button class="theme" id="rust" role="menuitem">Rust</button></li>
 <li role="none"><button class="theme" id="coal" role="menuitem">Coal</button></li>
@@ -141,7 +144,7 @@
 These networks replace ordinary activation functions with compositional counterparts, making
 them analytically transparent while retaining their expressiveness. This also enables exact computation of interactions between any part of the model.</p>
 <p><img alt="digits" src="images/digits.webp"/></p>
-<p>The above image depicts salient interactions between inputs and output of a multi-layer image model.<sup class="footnote-reference"><a href="#1">1</a></sup>
+<p>The above image depicts salient interactions between inputs and output of a multi-layer image model.<sup class="footnote-reference" id="fr-1-1"><a href="#footnote-1">1</a></sup>
 These images are extracted from the weights alone, requiring no input dataset or extra information.
 Compositional networks make several open problems in interpretability tractable.</p>
 <h3 id="directly-interpreting-weights"><a class="header" href="#directly-interpreting-weights">Directly interpreting weights</a></h3>
@@ -158,10 +161,11 @@ This can be used to order subspaces in the weights by global importance, just li
 <p>In short, many metrics become tractable (and even fast) to compute.
 While this can be used toward deep learning science, this book focusses on their interpretability.
 We refer to such methods under the umbrella name of 'compositional interpretability'.</p>
-<div class="footnote-definition" id="1"><sup class="footnote-definition-label">1</sup>
-<p>Specifically, this is a 3-layer model trained on the street-view house number (SVHN) dataset.</p>
-</div>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="introduction-1"><a class="header" href="#introduction-1">Introduction</a></h1>
+<hr/>
+<ol class="footnote-definition"><li id="footnote-1">
+<p>Specifically, this is a 3-layer model trained on the street-view house number (SVHN) dataset. <a href="#fr-1-1">↩</a></p>
+</li>
+</ol><div style="break-before: page; page-break-before: always;"></div><h1 id="introduction-1"><a class="header" href="#introduction-1">Introduction</a></h1>
 <h3 id="who-is-this-book-for"><a class="header" href="#who-is-this-book-for">Who is this book for?</a></h3>
 <p>This book is aimed primarily at (mechanistic) interpretability researchers.
 It serves as an informal tutorial to compositional interpretability.</p>
@@ -196,7 +200,7 @@ The authors recommend trying the 'Rust' theme, as it reduces visual strain.</p>
 Consider any set of input features that activates an output: ablating any of them could ‘switch off’ the ReLU.
 Each feature depends on the others; subsets of the input cannot be considered separately as this changes the outputs unrecoverably.
 Examining these activation functions thus requires the whole input.
-Consequently, weights cannot be meaningfully decomposed and circuits cannot be generally understood.<sup class="footnote-reference"><a href="#1">1</a></sup>
+Consequently, weights cannot be meaningfully decomposed and circuits cannot be generally understood.<sup class="footnote-reference" id="fr-1-1"><a href="#footnote-1">1</a></sup>
 In other words, non-compositional activation functions shroud the high-level relation between inputs, outputs and weights.
 This is why adequately describing feature interactions has remained an open problem in interpretability.</p>
 <h3 id="compositional-activation-functions"><a class="header" href="#compositional-activation-functions">Compositional activation functions</a></h3>
@@ -227,10 +231,11 @@ For instance, all transformer modifications have been tested up to GPT2 sized mo
 However, this may change at the largest of sizes or for specific tasks that weren't considered here.</p>
 <p>One instance in which the proposed architectures perform worse are low-data settings.
 Iterating over many epochs saturates our models quicker, while ReLU-based counterparts continue improving.</p>
-<div class="footnote-definition" id="1"><sup class="footnote-definition-label">1</sup>
-<p>I am talking in a theoretic sense. In practice, some parts of ReLU-based networks contain near-decomposable structures that can be approximated well. However, we want to be able to analyse the parts of the networks that don't follow this pattern.</p>
-</div>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="tensor-networks"><a class="header" href="#tensor-networks">Tensor Networks</a></h1>
+<hr/>
+<ol class="footnote-definition"><li id="footnote-1">
+<p>I am talking in a theoretic sense. In practice, some parts of ReLU-based networks contain near-decomposable structures that can be approximated well. However, we want to be able to analyse the parts of the networks that don't follow this pattern. <a href="#fr-1-1">↩</a></p>
+</li>
+</ol><div style="break-before: page; page-break-before: always;"></div><h1 id="tensor-networks"><a class="header" href="#tensor-networks">Tensor Networks</a></h1>
 <p>Matrices can be seen as a map between one space to another.
 Tensors generalise this by mapping between an arbitrary number of spaces.</p>
 <p>For instance, a matrix may encode a graph, translating between <code>source -&gt; target</code>.
@@ -251,7 +256,7 @@ This graphical notation is really useful to understand what kind of structure th
 However, these can be studied efficiently anyway as highly structured tensor networks.</p>
 </blockquote>
 <h3 id="introduction-to-tensor-diagrams"><a class="header" href="#introduction-to-tensor-diagrams">Introduction to tensor diagrams</a></h3>
-<p>This following introduces the tensor diagram notation, focussing on common intuitions.<sup class="footnote-reference"><a href="#1">1</a></sup></p>
+<p>This following introduces the tensor diagram notation, focussing on common intuitions.<sup class="footnote-reference" id="fr-1-1"><a href="#footnote-1">1</a></sup></p>
 <div class="columns">
 <div class="half-column center">
 <p> A matrix is denoted as a box. <br/> It has an input and an output wire. <br/> These can be named for clarity. </p>
@@ -368,10 +373,11 @@ Unconnected sub-networks represent a (tensor) product.
 A partial identity, scaled by the inner product of V and the second input.
 </details>
 
-<div class="footnote-definition" id="1"><sup class="footnote-definition-label">1</sup>
-<p>This notation often varies throughout the literature. While the underlying meaning is formal, the notation itself is often intuitive. The used diagrams are inspired by (Coecke and Kissinger, 2018)</p>
-</div>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="summary-1"><a class="header" href="#summary-1">Summary</a></h1>
+<hr/>
+<ol class="footnote-definition"><li id="footnote-1">
+<p>This notation often varies throughout the literature. While the underlying meaning is formal, the notation itself is often intuitive. The used diagrams are inspired by (Coecke and Kissinger, 2018) <a href="#fr-1-1">↩</a></p>
+</li>
+</ol><div style="break-before: page; page-break-before: always;"></div><h1 id="summary-1"><a class="header" href="#summary-1">Summary</a></h1>
 <p>While many feature-first interpretability methods exists; their formation and effect isn't understood well.
 We argue that compositional layers, rooted in (self-)multiplication, can overcome this.
 Any such compositional layer is describable by a tensor, potentially operating on copies of the input.

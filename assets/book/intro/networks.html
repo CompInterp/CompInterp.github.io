@@ -1,421 +1,318 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 
 <html class="light sidebar-visible" dir="ltr" lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <title>Tensor Networks - Compositional Interpretability</title>
+<head>
 
-    <meta content="" name="description" />
-    <meta content="width=device-width, initial-scale=1" name="viewport" />
-    <meta content="#ffffff" name="theme-color" />
-    <link href="../favicon.svg" rel="icon" />
-    <link href="../favicon.png" rel="shortcut icon" />
-    <link href="../css/variables.css" rel="stylesheet" />
-    <link href="../css/general.css" rel="stylesheet" />
-    <link href="../css/chrome.css" rel="stylesheet" />
-    <link href="../css/print.css" media="print" rel="stylesheet" />
+<meta charset="utf-8"/>
+<title>Tensor Networks - Compositional Interpretability</title>
 
-    <link href="../FontAwesome/css/font-awesome.css" rel="stylesheet" />
-    <link href="../fonts/fonts.css" rel="stylesheet" />
+<meta content="" name="description"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="#ffffff" name="theme-color"/>
+<link href="../favicon.svg" rel="icon"/>
+<link href="../favicon.png" rel="shortcut icon"/>
+<link href="../css/variables.css" rel="stylesheet"/>
+<link href="../css/general.css" rel="stylesheet"/>
+<link href="../css/chrome.css" rel="stylesheet"/>
+<link href="../css/print.css" media="print" rel="stylesheet"/>
 
-    <link href="../highlight.css" id="highlight-css" rel="stylesheet" />
-    <link href="../tomorrow-night.css" id="tomorrow-night-css" rel="stylesheet" />
-    <link href="../ayu-highlight.css" id="ayu-highlight-css" rel="stylesheet" />
+<link href="../FontAwesome/css/font-awesome.css" rel="stylesheet"/>
+<link href="../fonts/fonts.css" rel="stylesheet"/>
 
-    <link href="../style.css" rel="stylesheet" />
+<link href="../highlight.css" id="highlight-css" rel="stylesheet"/>
+<link href="../tomorrow-night.css" id="tomorrow-night-css" rel="stylesheet"/>
+<link href="../ayu-highlight.css" id="ayu-highlight-css" rel="stylesheet"/>
 
-    <script async="" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<link href="../style.css" rel="stylesheet"/>
 
-    <script>
-      var path_to_root = "../";
-      var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
-    </script>
+<script async="" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
-    <script src="../toc.js"></script>
-  </head>
-  <body>
-    <div id="body-container">
-      <script>
-        try {
-          var theme = localStorage.getItem("mdbook-theme");
-          var sidebar = localStorage.getItem("mdbook-sidebar");
+<script>
+            const path_to_root = "../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+        </script>
 
-          if (theme.startsWith('"') && theme.endsWith('"')) {
-            localStorage.setItem("mdbook-theme", theme.slice(1, theme.length - 1));
-          }
+<script src="../toc.js"></script>
+</head>
+<body>
+<div id="body-container">
 
-          if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
-            localStorage.setItem("mdbook-sidebar", sidebar.slice(1, sidebar.length - 1));
-          }
-        } catch (e) {}
-      </script>
+<script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
 
-      <script>
-        var theme;
-        try {
-          theme = localStorage.getItem("mdbook-theme");
-        } catch (e) {}
-        if (theme === null || theme === undefined) {
-          theme = default_theme;
-        }
-        const html = document.documentElement;
-        html.classList.remove("light");
-        html.classList.add(theme);
-        html.classList.add("js");
-      </script>
-      <input class="hidden" id="sidebar-toggle-anchor" type="checkbox" />
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
 
-      <script>
-        var sidebar = null;
-        var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
-        if (document.body.clientWidth >= 1080) {
-          try {
-            sidebar = localStorage.getItem("mdbook-sidebar");
-          } catch (e) {}
-          sidebar = sidebar || "visible";
-        } else {
-          sidebar = "hidden";
-        }
-        sidebar_toggle.checked = sidebar === "visible";
-        html.classList.remove("sidebar-visible");
-        html.classList.add("sidebar-" + sidebar);
-      </script>
-      <nav aria-label="Table of contents" class="sidebar" id="sidebar">
-        <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
-        <noscript>
-          <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
-        </noscript>
-        <div class="sidebar-resize-handle" id="sidebar-resize-handle">
-          <div class="sidebar-resize-indicator"></div>
-        </div>
-      </nav>
-      <div class="page-wrapper" id="page-wrapper">
-        <div class="page">
-          <div id="menu-bar-hover-placeholder"></div>
-          <div class="menu-bar sticky" id="menu-bar">
-            <div class="left-buttons">
-              <label
-                aria-controls="sidebar"
-                aria-label="Toggle Table of Contents"
-                class="icon-button"
-                for="sidebar-toggle-anchor"
-                id="sidebar-toggle"
-                title="Toggle Table of Contents"
-              >
-                <i class="fa fa-bars"></i>
-              </label>
-              <button
-                aria-controls="theme-list"
-                aria-expanded="false"
-                aria-haspopup="true"
-                aria-label="Change theme"
-                class="icon-button"
-                id="theme-toggle"
-                title="Change theme"
-                type="button"
-              >
-                <i class="fa fa-paint-brush"></i>
-              </button>
-              <ul aria-label="Themes" class="theme-popup" id="theme-list" role="menu">
-                <li role="none"><button class="theme" id="light" role="menuitem">Light</button></li>
-                <li role="none"><button class="theme" id="rust" role="menuitem">Rust</button></li>
-                <li role="none"><button class="theme" id="coal" role="menuitem">Coal</button></li>
-                <li role="none"><button class="theme" id="navy" role="menuitem">Navy</button></li>
-                <li role="none"><button class="theme" id="ayu" role="menuitem">Ayu</button></li>
-              </ul>
-              <button
-                aria-controls="searchbar"
-                aria-expanded="false"
-                aria-keyshortcuts="S"
-                aria-label="Toggle Searchbar"
-                class="icon-button"
-                id="search-toggle"
-                title="Search. (Shortkey: s)"
-                type="button"
-              >
-                <i class="fa fa-search"></i>
-              </button>
-            </div>
-            <h1 class="menu-title">Compositional Interpretability</h1>
-            <div class="right-buttons">
-              <a aria-label="Print this book" href="../print.html" title="Print this book">
-                <i class="fa fa-print" id="print-button"></i>
-              </a>
-            </div>
-          </div>
-          <div class="hidden" id="search-wrapper">
-            <form class="searchbar-outer" id="searchbar-outer">
-              <input
-                aria-controls="searchresults-outer"
-                aria-describedby="searchresults-header"
-                id="searchbar"
-                name="searchbar"
-                placeholder="Search this book ..."
-                type="search"
-              />
-            </form>
-            <div class="searchresults-outer hidden" id="searchresults-outer">
-              <div class="searchresults-header" id="searchresults-header"></div>
-              <ul id="searchresults"></ul>
-            </div>
-          </div>
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
 
-          <script>
-            document.getElementById("sidebar-toggle").setAttribute("aria-expanded", sidebar === "visible");
-            document.getElementById("sidebar").setAttribute("aria-hidden", sidebar !== "visible");
-            Array.from(document.querySelectorAll("#sidebar a")).forEach(function (link) {
-              link.setAttribute("tabIndex", sidebar === "visible" ? 0 : -1);
-            });
-          </script>
-          <div class="content" id="content">
-            <main>
-              <h1 id="tensor-networks"><a class="header" href="#tensor-networks">Tensor Networks</a></h1>
-              <p>
-                Matrices can be seen as a map between one space to another. Tensors generalise this by mapping between an arbitrary number of spaces.
-              </p>
-              <p>
-                For instance, a matrix may encode a graph, translating between <code>source -&gt; target</code>. A time-dependent graph
-                <code>time, source -&gt; target</code> can be described by a tensor. Tensors can be seen as high-dimensional cubes, where each side is
-                called an index (sometimes called mode). The amount of indices is called the order of the tensor.
-              </p>
-              <p>
-                Unfortunately, the number of parameters in a tensor grows exponentially in its order. This makes is intractable to work with tensors
-                for many non-trivial problems.
-              </p>
-              <h3 id="factorising-tensors-into-networks">
-                <a class="header" href="#factorising-tensors-into-networks">Factorising tensors into networks</a>
-              </h3>
-              <p>
-                Despite only being quadratic in parameter count, it can be impractical to work with huge matrices. A common solution is to factorise
-                or decompose these into something that is easier to work with. For instance, such a matrix \(X\) can be approximated using two lower
-                rank parts \(X \approx A B\).
-              </p>
-              <p>
-                There exist several generalisations to tensors, all of which can be described by tensor networks. Tensor networks are graphs, where
-                each node, or box, represents a tensor and each edge, or wire, represents how tensors are connected. Unlike an ordinary graph, tensor
-                networks can have unconnected edges that represent unconnected indices (inputs/outputs). This graphical notation is really useful to
-                understand what kind of structure the described tensor has.
-              </p>
-              <blockquote>
-                <p>
-                  Tensors instantiated by deep neural networks are laughably huge -- over thousand orders. However, these can be studied efficiently
-                  anyway as highly structured tensor networks.
-                </p>
-              </blockquote>
-              <h3 id="introduction-to-tensor-diagrams">
-                <a class="header" href="#introduction-to-tensor-diagrams">Introduction to tensor diagrams</a>
-              </h3>
-              <p>
-                This following introduces the tensor diagram notation, focussing on common intuitions.<sup class="footnote-reference"
-                  ><a href="#1">1</a></sup
-                >
-              </p>
-              <div class="columns">
-                <div class="half-column center">
-                  <p>
-                    A matrix is denoted as a box. <br />
-                    It has an input and an output wire. <br />
-                    These can be named for clarity.
-                  </p>
-                  <object data="diagrams/matrix.svg"></object>
-                </div>
-                <div class="half-column center">
-                  <p>
-                    A vector is also a box but only has a single wire. <br />
-                    We don't distinguish between input or output vectors for simplicity.
-                  </p>
-                  <object data="diagrams/vector.svg"></object>
-                </div>
-              </div>
-              <div class="columns">
-                <div class="half-column center">
-                  <p>A vector-matrix multiplication connects them.</p>
-                  <object data="diagrams/vecmul.svg"></object>
-                </div>
-                <div class="half-column center">
-                  <p>A matrix multiplication connects two matrices.<br />It contracts away the hidden dimension.</p>
-                  <object data="diagrams/matmul.svg"></object>
-                </div>
-              </div>
-              <div class="columns">
-                <div class="half-column center">
-                  <p>
-                    Transposing matrices changes the order of input and output. This corresponds to a vertical reflection of the diagram (hence the
-                    nook).
-                  </p>
-                  <object data="diagrams/transpose.svg"></object>
-                </div>
-                <div class="half-column center">
-                  <p>
-                    (Flattened) Matrices can represent a connection between inputs, just like in the attention mechanism. This shows why one side
-                    should be transposed.
-                  </p>
+<script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+<input class="hidden" id="sidebar-toggle-anchor" type="checkbox"/>
 
-                  <object data="diagrams/attention.svg"></object>
-                </div>
-              </div>
-              <div class="columns">
-                <div class="half-column center">
-                  <p>Special matrix structure can be conveyed through diagrams. This is the identity matrix. It doesn't do anything to the input.</p>
-                  <object data="diagrams/identity.svg"></object>
-                </div>
-                <div class="half-column center">
-                  <p>
-                    A diagonal matrix is written as an identity matrix, element-wise multiplied by a vector. <br />
-                    In this case, the multiplication is denoted as a black circle.
-                  </p>
+<script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+<nav aria-label="Table of contents" class="sidebar" id="sidebar">
 
-                  <object data="diagrams/spider.svg"></object>
-                </div>
-              </div>
-              <div class="columns">
-                <div class="half-column center">
-                  <p>
-                    When an isometric (think orthogonal) matrix is multiplied with its transpose it equals the identity. We indicate such matrices
-                    with a border.
-                  </p>
+<mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+<noscript>
+<iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+</noscript>
+<div class="sidebar-resize-handle" id="sidebar-resize-handle">
+<div class="sidebar-resize-indicator"></div>
+</div>
+</nav>
+<div class="page-wrapper" id="page-wrapper">
+<div class="page">
+<div id="menu-bar-hover-placeholder"></div>
+<div class="menu-bar sticky" id="menu-bar">
+<div class="left-buttons">
+<label aria-controls="sidebar" aria-label="Toggle Table of Contents" class="icon-button" for="sidebar-toggle-anchor" id="sidebar-toggle" title="Toggle Table of Contents">
+<i class="fa fa-bars"></i>
+</label>
+<button aria-controls="theme-list" aria-expanded="false" aria-haspopup="true" aria-label="Change theme" class="icon-button" id="theme-toggle" title="Change theme" type="button">
+<i class="fa fa-paint-brush"></i>
+</button>
+<ul aria-label="Themes" class="theme-popup" id="theme-list" role="menu">
+<li role="none"><button class="theme" id="default_theme" role="menuitem">Auto</button></li>
+<li role="none"><button class="theme" id="light" role="menuitem">Light</button></li>
+<li role="none"><button class="theme" id="rust" role="menuitem">Rust</button></li>
+<li role="none"><button class="theme" id="coal" role="menuitem">Coal</button></li>
+<li role="none"><button class="theme" id="navy" role="menuitem">Navy</button></li>
+<li role="none"><button class="theme" id="ayu" role="menuitem">Ayu</button></li>
+</ul>
+<button aria-controls="searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-label="Toggle Searchbar" class="icon-button" id="search-toggle" title="Search. (Shortkey: s)" type="button">
+<i class="fa fa-search"></i>
+</button>
+</div>
+<h1 class="menu-title">Compositional Interpretability</h1>
+<div class="right-buttons">
+<a aria-label="Print this book" href="../print.html" title="Print this book">
+<i class="fa fa-print" id="print-button"></i>
+</a>
+</div>
+</div>
+<div class="hidden" id="search-wrapper">
+<form class="searchbar-outer" id="searchbar-outer">
+<input aria-controls="searchresults-outer" aria-describedby="searchresults-header" id="searchbar" name="searchbar" placeholder="Search this book ..." type="search"/>
+</form>
+<div class="searchresults-outer hidden" id="searchresults-outer">
+<div class="searchresults-header" id="searchresults-header"></div>
+<ul id="searchresults">
+</ul>
+</div>
+</div>
 
-                  <object data="diagrams/orthogonal.svg"></object>
-                </div>
-                <div class="half-column center">
-                  <p>Diagrammatic equations are a powerful tool to simplify and analyse tensor networks. We write the SVD of a matrix as such.</p>
-                  <object data="diagrams/svd.svg"></object>
-                </div>
-              </div>
-              <div class="columns">
-                <div class="half-column center">
-                  <p>The number of free/open wires indicate the order of the tensor. This box represents a dense third-order tensor.</p>
-                  <object data="diagrams/tensor.svg"></object>
-                </div>
-                <div class="half-column center">
-                  <p>There exist other ways in which to instantiate tensors that may be more efficient. This is a diagram of a bilinear layer.</p>
-                  <object data="diagrams/bilinear.svg"></object>
-                </div>
-              </div>
-              <h3 id="mathematical-meaning"><a class="header" href="#mathematical-meaning">Mathematical meaning</a></h3>
-              <p>
-                Diagrams are useful because they convey an intuitive overview of the structure of networks. However, they can also be used to
-                understand gritty details of specific contractions.
-              </p>
-              <p>
-                In these diagrams, boxes are tensors, but what are wires and what does it mean to connect them? Wires represent a sum of over basis
-                vectors, for example, zero vectors with 1 at entry \(i\).
-              </p>
-              <div class="center"><object data="diagrams/wire.svg"></object></div>
-              <p>
-                Hence, connections indicate that some index of a matrix is the same (and should be summed). Following this, diagrams can be converted
-                to Einstein notation, as encountered in <code>einsums</code>.
-              </p>
-              <h3 id="diagrammatic-reasoning"><a class="header" href="#diagrammatic-reasoning">Diagrammatic reasoning</a></h3>
-              <p>
-                Becoming fluent in tensor networks takes time and practice; some seemingly simple have non-trivial interpretations. However, these
-                diagrams allow us to spatially reason about tensor operations in a way other mathematical tools don't. They are not merely a
-                visualisation tool, they are a formal language over tensor networks. Diagrams can be seen as formulae, between which equalities can
-                holds (as illustrated in the SVD example).
-              </p>
-              <p>The following are a few examples of specific networks with a well-known meaning. Try to interpret what each diagram represents.</p>
-              <div class="center"><object data="diagrams/trace.svg"></object></div>
-              <details>
-                <summary>Hint</summary>
-                Connecting both sides of the same matrix implies taking a sum over equal indices.
-              </details>
-              <details>
-                <summary>Solution</summary>
-                <p>The trace of A. \(\left(\sum_i A_{ii}\right)\)</p>
-              </details>
-              <div class="center"><object data="diagrams/frobenius.svg"></object></div>
-              <details>
-                <summary>Hint</summary>
-                This diagram can be seen as the trace of A multiplied with itself.
-              </details>
-              <details>
-                <summary>Solution</summary>
-                <p>The Frobenius norm of matrix A. \(\left(\sum_{ij} A_{ij}A_{ij}\right)\)</p>
-              </details>
-              <div class="center"><object data="diagrams/product.svg"></object></div>
-              <details>
-                <summary>Hint</summary>
-                Both sides perform an element-wise multiplication instead of an inner product.
-              </details>
-              <details>
-                <summary>Solution</summary>
-                The element-wise multiplication of matrix entries in A and B.
-              </details>
-              <div class="center"><object data="diagrams/similarity.svg"></object></div>
-              <details>
-                <summary>Hint</summary>
-                Unconnected sub-networks represent a (tensor) product.
-              </details>
-              <details>
-                <summary>Solution</summary>
-                A partial identity, scaled by the inner product of V and the second input.
-              </details>
+<script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+<div class="content" id="content">
+<main>
+<h1 id="tensor-networks"><a class="header" href="#tensor-networks">Tensor Networks</a></h1>
+<p>Matrices can be seen as a map between one space to another.
+Tensors generalise this by mapping between an arbitrary number of spaces.</p>
+<p>For instance, a matrix may encode a graph, translating between <code>source -&gt; target</code>.
+A time-dependent graph <code>time, source -&gt; target</code> can be described by a tensor.
+Tensors can be seen as high-dimensional cubes, where each side is called an index (sometimes called mode). The amount of indices is called the order of the tensor.</p>
+<p>Unfortunately, the number of parameters in a tensor grows exponentially in its order.
+This makes is intractable to work with tensors for many non-trivial problems.</p>
+<h3 id="factorising-tensors-into-networks"><a class="header" href="#factorising-tensors-into-networks">Factorising tensors into networks</a></h3>
+<p>Despite only being quadratic in parameter count, it can be impractical to work with huge matrices.
+A common solution is to factorise or decompose these into something that is easier to work with.
+For instance, such a matrix \(X\) can be approximated using two lower rank parts \(X \approx A B\).</p>
+<p>There exist several generalisations to tensors, all of which can be described by tensor networks.
+Tensor networks are graphs, where each node, or box, represents a tensor and each edge, or wire, represents how tensors are connected.
+Unlike an ordinary graph, tensor networks can have unconnected edges that represent unconnected indices (inputs/outputs).
+This graphical notation is really useful to understand what kind of structure the described tensor has.</p>
+<blockquote>
+<p>Tensors instantiated by deep neural networks are laughably huge -- over thousand orders.
+However, these can be studied efficiently anyway as highly structured tensor networks.</p>
+</blockquote>
+<h3 id="introduction-to-tensor-diagrams"><a class="header" href="#introduction-to-tensor-diagrams">Introduction to tensor diagrams</a></h3>
+<p>This following introduces the tensor diagram notation, focussing on common intuitions.<sup class="footnote-reference" id="fr-1-1"><a href="#footnote-1">1</a></sup></p>
+<div class="columns">
+<div class="half-column center">
+<p> A matrix is denoted as a box. <br/> It has an input and an output wire. <br/> These can be named for clarity. </p>
+<object data="diagrams/matrix.svg"></object>
+</div>
+<div class="half-column center">
+<p> A vector is also a box but only has a single wire. <br/> We don't distinguish between input or output vectors for simplicity.</p>
+<object data="diagrams/vector.svg"></object>
+</div>
+</div>
+<div class="columns">
+<div class="half-column center">
+<p> A vector-matrix multiplication connects them. </p>
+<object data="diagrams/vecmul.svg"></object>
+</div>
+<div class="half-column center">
+<p> A matrix multiplication connects two matrices.<br/>It contracts away the hidden dimension.</p>
+<object data="diagrams/matmul.svg"></object>
+</div>
+</div>
+<div class="columns">
+<div class="half-column center">
+<p>Transposing matrices changes the order of input and output. This corresponds to a vertical reflection of the diagram (hence the nook).</p>
+<object data="diagrams/transpose.svg"></object>
+</div>
+<div class="half-column center">
+<p> (Flattened) Matrices can represent a connection between inputs, just like in the attention mechanism. This shows why one side should be transposed. </p>
 
-              <div class="footnote-definition" id="1">
-                <sup class="footnote-definition-label">1</sup>
-                <p>
-                  This notation often varies throughout the literature. While the underlying meaning is formal, the notation itself is often
-                  intuitive. The used diagrams are inspired by (Coecke and Kissinger, 2018)
-                </p>
-              </div>
-            </main>
-            <nav aria-label="Page navigation" class="nav-wrapper">
-              <a
-                aria-keyshortcuts="Left"
-                aria-label="Previous chapter"
-                class="mobile-nav-chapters previous"
-                href="../intro/motivation.html"
-                rel="prev"
-                title="Previous chapter"
-              >
-                <i class="fa fa-angle-left"></i>
-              </a>
-              <a
-                aria-keyshortcuts="Right"
-                aria-label="Next chapter"
-                class="mobile-nav-chapters next"
-                href="../intro/summary.html"
-                rel="next prefetch"
-                title="Next chapter"
-              >
-                <i class="fa fa-angle-right"></i>
-              </a>
-              <div style="clear: both"></div>
-            </nav>
-          </div>
-        </div>
-        <nav aria-label="Page navigation" class="nav-wide-wrapper">
-          <a
-            aria-keyshortcuts="Left"
-            aria-label="Previous chapter"
-            class="nav-chapters previous"
-            href="../intro/motivation.html"
-            rel="prev"
-            title="Previous chapter"
-          >
-            <i class="fa fa-angle-left"></i>
-          </a>
-          <a
-            aria-keyshortcuts="Right"
-            aria-label="Next chapter"
-            class="nav-chapters next"
-            href="../intro/summary.html"
-            rel="next prefetch"
-            title="Next chapter"
-          >
-            <i class="fa fa-angle-right"></i>
-          </a>
-        </nav>
-      </div>
-      <script>
-        window.playground_copyable = true;
-      </script>
-      <script src="../elasticlunr.min.js"></script>
-      <script src="../mark.min.js"></script>
-      <script src="../searcher.js"></script>
-      <script src="../clipboard.min.js"></script>
-      <script src="../highlight.js"></script>
-      <script src="../book.js"></script>
-    </div>
-  </body>
+
+<object data="diagrams/attention.svg"></object>
+</div>
+</div>
+<div class="columns">
+<div class="half-column center">
+<p> Special matrix structure can be conveyed through diagrams. This is the identity matrix. It doesn't do anything to the input. </p>
+<object data="diagrams/identity.svg"></object>
+</div>
+<div class="half-column center">
+<p>A diagonal matrix is written as an identity matrix, element-wise multiplied by a vector. <br/> In this case, the multiplication is denoted as a black circle.</p>
+
+<object data="diagrams/spider.svg"></object>
+</div>
+</div>
+<div class="columns">
+<div class="half-column center">
+<p> When an isometric (think orthogonal) matrix is multiplied with its transpose it equals the identity. We indicate such matrices with a border. </p>
+
+<object data="diagrams/orthogonal.svg"></object>
+</div>
+<div class="half-column center">
+<p> Diagrammatic equations are a powerful tool to simplify and analyse tensor networks. We write the SVD of a matrix as such. </p>
+<object data="diagrams/svd.svg"></object>
+</div>
+</div>
+<div class="columns">
+<div class="half-column center">
+<p> The number of free/open wires indicate the order of the tensor. This box represents a dense third-order tensor. </p>
+<object data="diagrams/tensor.svg"></object>
+</div>
+<div class="half-column center">
+<p> There exist other ways in which to instantiate tensors that may be more efficient. This is a diagram of a bilinear layer. </p>
+<object data="diagrams/bilinear.svg"></object>
+</div>
+</div>
+<h3 id="mathematical-meaning"><a class="header" href="#mathematical-meaning">Mathematical meaning</a></h3>
+<p>Diagrams are useful because they convey an intuitive overview of the structure of networks.
+However, they can also be used to understand gritty details of specific contractions.</p>
+<p>In these diagrams, boxes are tensors, but what are wires and what does it mean to connect them?
+Wires represent a sum of over basis vectors, for example, zero vectors with 1 at entry \(i\).</p>
+<div class="center"><object data="diagrams/wire.svg"></object></div>
+<p>Hence, connections indicate that some index of a matrix is the same (and should be summed).
+Following this, diagrams can be converted to Einstein notation, as encountered in <code>einsums</code>.</p>
+<h3 id="diagrammatic-reasoning"><a class="header" href="#diagrammatic-reasoning">Diagrammatic reasoning</a></h3>
+<p>Becoming fluent in tensor networks takes time and practice; some seemingly simple have non-trivial interpretations.
+However, these diagrams allow us to spatially reason about tensor operations in a way other mathematical tools don't.
+They are not merely a visualisation tool, they are a formal language over tensor networks.
+Diagrams can be seen as formulae, between which equalities can holds (as illustrated in the SVD example).</p>
+<p>The following are a few examples of specific networks with a well-known meaning.
+Try to interpret what each diagram represents.</p>
+<div class="center"><object data="diagrams/trace.svg"></object></div>
+<details>
+<summary>Hint</summary>
+Connecting both sides of the same matrix implies taking a sum over equal indices.
+</details>
+<details>
+<summary>Solution </summary>
+<p>The trace of A. \(\left(\sum_i A_{ii}\right)\)</p>
+</details>
+<div class="center"><object data="diagrams/frobenius.svg"></object></div>
+<details>
+<summary>Hint</summary>
+This diagram can be seen as the trace of A multiplied with itself.
+</details>
+<details>
+<summary>Solution</summary>
+<p>The Frobenius norm of matrix A. \(\left(\sum_{ij} A_{ij}A_{ij}\right)\)</p>
+</details>
+<div class="center"><object data="diagrams/product.svg"></object></div>
+<details>
+<summary>Hint</summary>
+Both sides perform an element-wise multiplication instead of an inner product.
+</details>
+<details>
+<summary>Solution</summary>
+The element-wise multiplication of matrix entries in A and B.
+</details>
+<div class="center"><object data="diagrams/similarity.svg"></object></div>
+<details>
+<summary>Hint</summary>
+Unconnected sub-networks represent a (tensor) product.
+</details>
+<details>
+<summary>Solution</summary>
+A partial identity, scaled by the inner product of V and the second input.
+</details>
+
+<hr/>
+<ol class="footnote-definition"><li id="footnote-1">
+<p>This notation often varies throughout the literature. While the underlying meaning is formal, the notation itself is often intuitive. The used diagrams are inspired by (Coecke and Kissinger, 2018) <a href="#fr-1-1">↩</a></p>
+</li>
+</ol>
+</main>
+<nav aria-label="Page navigation" class="nav-wrapper">
+
+<a aria-keyshortcuts="Left" aria-label="Previous chapter" class="mobile-nav-chapters previous" href="../intro/motivation.html" rel="prev" title="Previous chapter">
+<i class="fa fa-angle-left"></i>
+</a>
+<a aria-keyshortcuts="Right" aria-label="Next chapter" class="mobile-nav-chapters next" href="../intro/summary.html" rel="next prefetch" title="Next chapter">
+<i class="fa fa-angle-right"></i>
+</a>
+<div style="clear: both"></div>
+</nav>
+</div>
+</div>
+<nav aria-label="Page navigation" class="nav-wide-wrapper">
+<a aria-keyshortcuts="Left" aria-label="Previous chapter" class="nav-chapters previous" href="../intro/motivation.html" rel="prev" title="Previous chapter">
+<i class="fa fa-angle-left"></i>
+</a>
+<a aria-keyshortcuts="Right" aria-label="Next chapter" class="nav-chapters next" href="../intro/summary.html" rel="next prefetch" title="Next chapter">
+<i class="fa fa-angle-right"></i>
+</a>
+</nav>
+</div>
+<script>
+            window.playground_copyable = true;
+        </script>
+<script src="../elasticlunr.min.js"></script>
+<script src="../mark.min.js"></script>
+<script src="../searcher.js"></script>
+<script src="../clipboard.min.js"></script>
+<script src="../highlight.js"></script>
+<script src="../book.js"></script>
+
+</div>
+</body>
 </html>
