@@ -2,7 +2,7 @@ import os
 from bs4 import BeautifulSoup, Comment
 
 # Directory containing the HTML files
-directory = "/home/ward/Documents/CompInterp.github.io/assets/book/"
+directory = "assets/book/"
 
 
 def remove_comments_from_html(file_path):
