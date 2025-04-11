@@ -1,0 +1,742 @@
+<!DOCTYPE HTML>
+
+<html class="light sidebar-visible" dir="ltr" lang="en">
+<head>
+
+<meta charset="utf-8"/>
+<title>Compositional Interpretability</title>
+<meta content="noindex" name="robots"/>
+
+<meta content="" name="description"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="#ffffff" name="theme-color"/>
+<link href="favicon.svg" rel="icon"/>
+<link href="favicon.png" rel="shortcut icon"/>
+<link href="css/variables.css" rel="stylesheet"/>
+<link href="css/general.css" rel="stylesheet"/>
+<link href="css/chrome.css" rel="stylesheet"/>
+<link href="css/print.css" media="print" rel="stylesheet"/>
+
+<link href="FontAwesome/css/font-awesome.css" rel="stylesheet"/>
+<link href="fonts/fonts.css" rel="stylesheet"/>
+
+<link href="highlight.css" id="highlight-css" rel="stylesheet"/>
+<link href="tomorrow-night.css" id="tomorrow-night-css" rel="stylesheet"/>
+<link href="ayu-highlight.css" id="ayu-highlight-css" rel="stylesheet"/>
+
+<link href="style.css" rel="stylesheet"/>
+
+<script async="" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<script>
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+<script src="toc.js"></script>
+</head>
+<body>
+<div id="body-container">
+
+<script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+<script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+<input class="hidden" id="sidebar-toggle-anchor" type="checkbox"/>
+
+<script>
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+<nav aria-label="Table of contents" class="sidebar" id="sidebar">
+
+<mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+<noscript>
+<iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
+</noscript>
+<div class="sidebar-resize-handle" id="sidebar-resize-handle">
+<div class="sidebar-resize-indicator"></div>
+</div>
+</nav>
+<div class="page-wrapper" id="page-wrapper">
+<div class="page">
+<div id="menu-bar-hover-placeholder"></div>
+<div class="menu-bar sticky" id="menu-bar">
+<div class="left-buttons">
+<label aria-controls="sidebar" aria-label="Toggle Table of Contents" class="icon-button" for="sidebar-toggle-anchor" id="sidebar-toggle" title="Toggle Table of Contents">
+<i class="fa fa-bars"></i>
+</label>
+<button aria-controls="theme-list" aria-expanded="false" aria-haspopup="true" aria-label="Change theme" class="icon-button" id="theme-toggle" title="Change theme" type="button">
+<i class="fa fa-paint-brush"></i>
+</button>
+<ul aria-label="Themes" class="theme-popup" id="theme-list" role="menu">
+<li role="none"><button class="theme" id="light" role="menuitem">Light</button></li>
+<li role="none"><button class="theme" id="rust" role="menuitem">Rust</button></li>
+<li role="none"><button class="theme" id="coal" role="menuitem">Coal</button></li>
+<li role="none"><button class="theme" id="navy" role="menuitem">Navy</button></li>
+<li role="none"><button class="theme" id="ayu" role="menuitem">Ayu</button></li>
+</ul>
+<button aria-controls="searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-label="Toggle Searchbar" class="icon-button" id="search-toggle" title="Search. (Shortkey: s)" type="button">
+<i class="fa fa-search"></i>
+</button>
+</div>
+<h1 class="menu-title">Compositional Interpretability</h1>
+<div class="right-buttons">
+<a aria-label="Print this book" href="print.html" title="Print this book">
+<i class="fa fa-print" id="print-button"></i>
+</a>
+</div>
+</div>
+<div class="hidden" id="search-wrapper">
+<form class="searchbar-outer" id="searchbar-outer">
+<input aria-controls="searchresults-outer" aria-describedby="searchresults-header" id="searchbar" name="searchbar" placeholder="Search this book ..." type="search"/>
+</form>
+<div class="searchresults-outer hidden" id="searchresults-outer">
+<div class="searchresults-header" id="searchresults-header"></div>
+<ul id="searchresults">
+</ul>
+</div>
+</div>
+
+<script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+<div class="content" id="content">
+<main>
+<h1 id="introduction"><a class="header" href="#introduction">Introduction</a></h1>
+<p>This book serves as an informal tutorial to \(\chi\)-nets, a natively decomposable and interpretable family of neural networks.
+These networks replace ordinary activation functions with compositional counterparts, making
+them analytically transparent while retaining their expressiveness. This also enables exact computation of interactions between any part of the model.</p>
+<p><img alt="digits" src="images/digits.webp"/></p>
+<p>The above image depicts salient interactions between inputs and output of a multi-layer image model.<sup class="footnote-reference"><a href="#1">1</a></sup>
+These images are extracted from the weights alone, requiring no input dataset or extra information.
+Compositional networks make several open problems in interpretability tractable.</p>
+<h3 id="directly-interpreting-weights"><a class="header" href="#directly-interpreting-weights">Directly interpreting weights</a></h3>
+<p>Input-based (activation-based) interpretability might miss important behaviour a model has learned, even when considering the full training dataset.
+Hence, they cannot be used to make important guarantees about what a model knows and doesn't.</p>
+<p>Analysing the weights directly provides a comprehensive view into model internals without relying on potentially unrepresentative inputs.</p>
+<h3 id="globally-decomposing-models"><a class="header" href="#globally-decomposing-models">Globally decomposing models</a></h3>
+<p>It's impossible to describe how changing a given subspace, either in the activations or weights, impacts an ordinary model.
+Extracted features, either with supervised (probes) or unsupervised (dictionary learning) techniques, have no guarantees about their utility downstream.
+This means a combination of ablations and qualitative analysis is required to understand what a feature does.</p>
+<p>For compositional networks, the downstream impact for any feature can be computed exactly.
+This can be used to order subspaces in the weights by global importance, just like SVD does for a linear model.</p>
+<h3 id="summary"><a class="header" href="#summary">Summary</a></h3>
+<p>In short, many metrics become tractable (and even fast) to compute.
+While this can be used toward deep learning science, this book focusses on their interpretability.
+We refer to such methods under the umbrella name of 'compositional interpretability'.</p>
+<div class="footnote-definition" id="1"><sup class="footnote-definition-label">1</sup>
+<p>Specifically, this is a 3-layer model trained on the street-view house number (SVHN) dataset.</p>
+</div>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="introduction-1"><a class="header" href="#introduction-1">Introduction</a></h1>
+<h3 id="who-is-this-book-for"><a class="header" href="#who-is-this-book-for">Who is this book for?</a></h3>
+<p>This book is aimed primarily at (mechanistic) interpretability researchers.
+It serves as an informal tutorial to compositional interpretability.</p>
+<p>Familiarity with the following topics is assumed.</p>
+<ul>
+<li>Linear algebra, specifically matrix decompositions</li>
+<li>Deep learning, specifically architecture design</li>
+<li>Common interpretability techniques and challenges</li>
+</ul>
+<p>While the book should be accessible without any of the above, it will require some googling.</p>
+<blockquote>
+<p>This book is in beta and may have a somewhat steep learning curve.
+For instance, lots of notation is required to properly understand the used methods.
+We're actively looking for feedback on how to improve this.</p>
+</blockquote>
+<h3 id="what-to-expect-from-this-book"><a class="header" href="#what-to-expect-from-this-book">What to expect from this book?</a></h3>
+<p>This book roughly consists of 3 parts.</p>
+<ul>
+<li>Combining the advantages of tensor networks and neural networks</li>
+<li>Leveraging compositionality in tensor networks toward interpretability</li>
+<li>Experimenting on real-world models to find interesting mechanisms</li>
+</ul>
+<p>The book is design with sequential reading in mind (and less as a lookup table).</p>
+<p>We believe most topics provide a fresh perspective, even for readers familiar with the subject.</p>
+
+<h3 id="some-reading-tips"><a class="header" href="#some-reading-tips">Some reading tips</a></h3>
+<p>This book natively supports different themes, selectable via the brush icon on the top-left.<br/>
+The authors recommend trying the 'Rust' theme, as it reduces visual strain.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="motivation"><a class="header" href="#motivation">Motivation</a></h1>
+<h3 id="why-composition-matters"><a class="header" href="#why-composition-matters">Why composition matters</a></h3>
+<p>Standard activation functions (such as ReLU, Sigmoid, etc.) are inherently non-compositional.
+Consider any set of input features that activates an output: ablating any of them could ‘switch off’ the ReLU.
+Each feature depends on the others; subsets of the input cannot be considered separately as this changes the outputs unrecoverably.
+Examining these activation functions thus requires the whole input.
+Consequently, weights cannot be meaningfully decomposed and circuits cannot be generally understood.<sup class="footnote-reference"><a href="#1">1</a></sup>
+In other words, non-compositional activation functions shroud the high-level relation between inputs, outputs and weights.
+This is why adequately describing feature interactions has remained an open problem in interpretability.</p>
+<h3 id="compositional-activation-functions"><a class="header" href="#compositional-activation-functions">Compositional activation functions</a></h3>
+<p>Fortunately, there exist compositional activation functions.
+Consider a linear layer followed by a squared activation function --- the simplest non-linear polynomial --- written as \( (A x)^2 \).
+We denote a single output as \( (a^T x)^2 \) where \(x\) is the input, and \(a\) is a matrix row for that output. This can be rewritten as follows:</p>
+<p>\[ (a^T x)^2 = (a^T x)^T (a^T x) = (x^T a) (a^T x) = x^T (a a^T) x = x^T Q x \]</p>
+<p>In other words, the square can be seen as an element-wise product between duplicated activations.
+This can rearranged into a single matrix \(Q\) (created by the outer product of \(a\) with itself) that defines how the outputs are created from a duplicated \(x\).
+Each entry in \(Q\) describes the interaction strength between any pair of input features.
+Notably, the output is precisely the sum of all weighted pairwise interactions.
+This means a given interaction will always be present (on different scales according to the input) and cannot be suppressed.
+A squared activation function’s feature composition is meaningful and can be described precisely.</p>
+<p>Formally, pairwise interactions form a linear basis for this activation function, which can be studied with well-known tools like SVD.
+This stack of interaction matrices can be seen as a third-order tensor, which describes a given layer exactly (and nicely).
+This clarifies why composition is helpful for interaction-based interpretability.</p>
+<h3 id="generalising-composition-using-tensors"><a class="header" href="#generalising-composition-using-tensors">Generalising composition using tensors</a></h3>
+<p>The quadratic activation can be generalised by allowing asymmetric interactions \((x^T a) (b^T x)\).<br/>
+This is called a bilinear layer and is an important building block for the remainder of this book.<br/>
+Bilinear layers are compositional and on par with common MLP layers, even in large transformers.</p>
+<p>This raises the question: <em>"what makes a layer compositional, for our purposes?"</em><br/>
+The answer is simple: <em>"everything that is describable by a tensor."</em></p>
+<p>The next section dives into what this means and how this can be used toward architectural design.</p>
+<h3 id="caveats"><a class="header" href="#caveats">Caveats</a></h3>
+<p>All proposed architectures are designed to incur minimal modifications and retain maximal accuracy.
+Despite this effort, it is impossible to guarantee these changes generalise accordingly across tasks.
+For instance, all transformer modifications have been tested up to GPT2 sized models and generally achieves loss parity.
+However, this may change at the largest of sizes or for specific tasks that weren't considered here.</p>
+<p>One instance in which the proposed architectures perform worse are low-data settings.
+Iterating over many epochs saturates our models quicker, while ReLU-based counterparts continue improving.</p>
+<div class="footnote-definition" id="1"><sup class="footnote-definition-label">1</sup>
+<p>I am talking in a theoretic sense. In practice, some parts of ReLU-based networks contain near-decomposable structures that can be approximated well. However, we want to be able to analyse the parts of the networks that don't follow this pattern.</p>
+</div>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="tensor-networks"><a class="header" href="#tensor-networks">Tensor Networks</a></h1>
+<p>Matrices can be seen as a map between one space to another.
+Tensors generalise this by mapping between an arbitrary number of spaces.</p>
+<p>For instance, a matrix may encode a graph, translating between <code>source -&gt; target</code>.
+A time-dependent graph <code>time, source -&gt; target</code> can be described by a tensor.
+Tensors can be seen as high-dimensional cubes, where each side is called an index (sometimes called mode). The amount of indices is called the order of the tensor.</p>
+<p>Unfortunately, the number of parameters in a tensor grows exponentially in its order.
+This makes is intractable to work with tensors for many non-trivial problems.</p>
+<h3 id="factorising-tensors-into-networks"><a class="header" href="#factorising-tensors-into-networks">Factorising tensors into networks</a></h3>
+<p>Despite only being quadratic in parameter count, it can be impractical to work with huge matrices.
+A common solution is to factorise or decompose these into something that is easier to work with.
+For instance, such a matrix \(X\) can be approximated using two lower rank parts \(X \approx A B\).</p>
+<p>There exist several generalisations to tensors, all of which can be described by tensor networks.
+Tensor networks are graphs, where each node, or box, represents a tensor and each edge, or wire, represents how tensors are connected.
+Unlike an ordinary graph, tensor networks can have unconnected edges that represent unconnected indices (inputs/outputs).
+This graphical notation is really useful to understand what kind of structure the described tensor has.</p>
+<blockquote>
+<p>Tensors instantiated by deep neural networks are laughably huge -- over thousand orders.
+However, these can be studied efficiently anyway as highly structured tensor networks.</p>
+</blockquote>
+<h3 id="introduction-to-tensor-diagrams"><a class="header" href="#introduction-to-tensor-diagrams">Introduction to tensor diagrams</a></h3>
+<p>This following introduces the tensor diagram notation, focussing on common intuitions.<sup class="footnote-reference"><a href="#1">1</a></sup></p>
+<div class="columns">
+<div class="half-column center">
+<p> A matrix is denoted as a box. <br/> It has an input and an output wire. <br/> These can be named for clarity. </p>
+<object data="diagrams/matrix.svg"></object>
+</div>
+<div class="half-column center">
+<p> A vector is also a box but only has a single wire. <br/> We don't distinguish between input or output vectors for simplicity.</p>
+<object data="diagrams/vector.svg"></object>
+</div>
+</div>
+<div class="columns">
+<div class="half-column center">
+<p> A vector-matrix multiplication connects them. </p>
+<object data="diagrams/vecmul.svg"></object>
+</div>
+<div class="half-column center">
+<p> A matrix multiplication connects two matrices.<br/>It contracts away the hidden dimension.</p>
+<object data="diagrams/matmul.svg"></object>
+</div>
+</div>
+<div class="columns">
+<div class="half-column center">
+<p>Transposing matrices changes the order of input and output. This corresponds to a vertical reflection of the diagram (hence the nook).</p>
+<object data="diagrams/transpose.svg"></object>
+</div>
+<div class="half-column center">
+<p> (Flattened) Matrices can represent a connection between inputs, just like in the attention mechanism. This shows why one side should be transposed. </p>
+
+
+<object data="diagrams/attention.svg"></object>
+</div>
+</div>
+<div class="columns">
+<div class="half-column center">
+<p> Special matrix structure can be conveyed through diagrams. This is the identity matrix. It doesn't do anything to the input. </p>
+<object data="diagrams/identity.svg"></object>
+</div>
+<div class="half-column center">
+<p>A diagonal matrix is written as an identity matrix, element-wise multiplied by a vector. <br/> In this case, the multiplication is denoted as a black circle.</p>
+
+<object data="diagrams/spider.svg"></object>
+</div>
+</div>
+<div class="columns">
+<div class="half-column center">
+<p> When an isometric (think orthogonal) matrix is multiplied with its transpose it equals the identity. We indicate such matrices with a border. </p>
+
+<object data="diagrams/orthogonal.svg"></object>
+</div>
+<div class="half-column center">
+<p> Diagrammatic equations are a powerful tool to simplify and analyse tensor networks. We write the SVD of a matrix as such. </p>
+<object data="diagrams/svd.svg"></object>
+</div>
+</div>
+<div class="columns">
+<div class="half-column center">
+<p> The number of free/open wires indicate the order of the tensor. This box represents a dense third-order tensor. </p>
+<object data="diagrams/tensor.svg"></object>
+</div>
+<div class="half-column center">
+<p> There exist other ways in which to instantiate tensors that may be more efficient. This is a diagram of a bilinear layer. </p>
+<object data="diagrams/bilinear.svg"></object>
+</div>
+</div>
+<h3 id="mathematical-meaning"><a class="header" href="#mathematical-meaning">Mathematical meaning</a></h3>
+<p>Diagrams are useful because they convey an intuitive overview of the structure of networks.
+However, they can also be used to understand gritty details of specific contractions.</p>
+<p>In these diagrams, boxes are tensors, but what are wires and what does it mean to connect them?
+Wires represent a sum of over basis vectors, for example, zero vectors with 1 at entry \(i\).</p>
+<div class="center"><object data="diagrams/wire.svg"></object></div>
+<p>Hence, connections indicate that some index of a matrix is the same (and should be summed).
+Following this, diagrams can be converted to Einstein notation, as encountered in <code>einsums</code>.</p>
+<h3 id="diagrammatic-reasoning"><a class="header" href="#diagrammatic-reasoning">Diagrammatic reasoning</a></h3>
+<p>Becoming fluent in tensor networks takes time and practice; some seemingly simple have non-trivial interpretations.
+However, these diagrams allow us to spatially reason about tensor operations in a way other mathematical tools don't.
+They are not merely a visualisation tool, they are a formal language over tensor networks.
+Diagrams can be seen as formulae, between which equalities can holds (as illustrated in the SVD example).</p>
+<p>The following are a few examples of specific networks with a well-known meaning.
+Try to interpret what each diagram represents.</p>
+<div class="center"><object data="diagrams/trace.svg"></object></div>
+<details>
+<summary>Hint</summary>
+Connecting both sides of the same matrix implies taking a sum over equal indices.
+</details>
+<details>
+<summary>Solution </summary>
+<p>The trace of A. \(\left(\sum_i A_{ii}\right)\)</p>
+</details>
+<div class="center"><object data="diagrams/frobenius.svg"></object></div>
+<details>
+<summary>Hint</summary>
+This diagram can be seen as the trace of A multiplied with itself.
+</details>
+<details>
+<summary>Solution</summary>
+<p>The Frobenius norm of matrix A. \(\left(\sum_{ij} A_{ij}A_{ij}\right)\)</p>
+</details>
+<div class="center"><object data="diagrams/product.svg"></object></div>
+<details>
+<summary>Hint</summary>
+Both sides perform an element-wise multiplication instead of an inner product.
+</details>
+<details>
+<summary>Solution</summary>
+The element-wise multiplication of matrix entries in A and B.
+</details>
+<div class="center"><object data="diagrams/similarity.svg"></object></div>
+<details>
+<summary>Hint</summary>
+Unconnected sub-networks represent a (tensor) product.
+</details>
+<details>
+<summary>Solution</summary>
+A partial identity, scaled by the inner product of V and the second input.
+</details>
+
+<div class="footnote-definition" id="1"><sup class="footnote-definition-label">1</sup>
+<p>This notation often varies throughout the literature. While the underlying meaning is formal, the notation itself is often intuitive. The used diagrams are inspired by (Coecke and Kissinger, 2018)</p>
+</div>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="summary-1"><a class="header" href="#summary-1">Summary</a></h1>
+<p>While many feature-first interpretability methods exists; their formation and effect isn't understood well.
+We argue that compositional layers, rooted in (self-)multiplication, can overcome this.
+Any such compositional layer is describable by a tensor, potentially operating on copies of the input.
+For efficiency, these tensors are instantiated by structured connections, described by a network.</p>
+<p>Tensor networks define how higher-order tensors are structured, often in terms of simple matrices.
+These networks can be described in a diagrammatic manner, which is convenient to reason about.
+Diagrams can convey complex structure while avoiding overly-specific math notations.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="architectures"><a class="header" href="#architectures">Architectures</a></h1>
+<p>This chapter demonstrates how common neural network architectures can be adapted into tensor networks,
+focusing on three essential modules: <a href="architecture/TODO">MLP</a>, <a href="architecture/TODO">convolution</a>, and <a href="architecture/TODO">attention</a>.
+Surprisingly, only minimal modifications are necessary, preserving the original spirit and performance of each architecture.
+For example, compositional attention typically requires changing just two lines of code.</p>
+<p>The first two sections (<a href="architecture/mlp.html">MLP</a> and <a href="architecture/normalisation.html">normalisation</a>) progressively introduce the required concepts for the more complicated architectures.</p>
+
+<div style="break-before: page; page-break-before: always;"></div><h1 id="mlps"><a class="header" href="#mlps">MLPs</a></h1>
+<p>MLPs are the bread and butter of any neural network.
+Its most basic form consists of an up projection, a non-linearity and a down-projection.
+Recently, a variant called gated linear units (GLU) have become more popular due to their increased expressivity.
+GLUs contains an additional element-wise 'gating' operation, as shown below.
+Intuitively, this gate selects which information should be retained dynamically.</p>
+<p>Mathematically, this corresponds to \( D (\sigma(Gx) \odot Ux) \), where \(\sigma\) is an activation function.
+Diagrammatically, this yields the following (pseudo-)network.</p>
+<div class="center">
+<object data="mlp/reglu.svg"></object>
+<p><i>The matrices of a GLU are often called G(ate), U(p) and D(own)</i></p>
+</div>
+<h3 id="bilinear-layers"><a class="header" href="#bilinear-layers">Bilinear layers</a></h3>
+<p>Interestingly, experiments show that the activation function can be removed with little penalty.
+This yields a bilinear layer and can be expressed as a tensor network.
+Consequently, we will use this variant extensively within our architecture design, starting with deep (residual) MLPs.
+Removing the non-linearity somewhat undermines the gating intuition, hence we rename these matrices.</p>
+<div class="center">
+<object data="mlp/bilinear.svg"></object>
+<p><i>The matrices of a bilinear layer are denoted as L(eft), R(ight) and D(own)</i></p>
+</div>
+<p>In fact, these layers have a deep history in tensor literature under the name canonical polyadic decomposition (CPD).[^1]
+In some sense, this can be seen as a generalisation of rank for tensors.
+Instead of summing outer-products of two vectors, it sums products of three vectors.</p>
+
+<h3 id="residuals"><a class="header" href="#residuals">Residuals</a></h3>
+
+<h3 id="normalisation"><a class="header" href="#normalisation">Normalisation</a></h3>
+
+<h3 id="normalisation--residuals"><a class="header" href="#normalisation--residuals">Normalisation &amp; residuals</a></h3>
+
+<div style="break-before: page; page-break-before: always;"></div><h1 id="sequences"><a class="header" href="#sequences">Sequences</a></h1>
+
+<div style="break-before: page; page-break-before: always;"></div><h1 id="attention"><a class="header" href="#attention">Attention</a></h1>
+
+<div style="break-before: page; page-break-before: always;"></div><h1 id="convolutions"><a class="header" href="#convolutions">Convolutions</a></h1>
+
+<div style="break-before: page; page-break-before: always;"></div><h3 id="mixing-sequences"><a class="header" href="#mixing-sequences">Mixing sequences</a></h3>
+
+<div style="break-before: page; page-break-before: always;"></div><h1 id="composition"><a class="header" href="#composition">Composition</a></h1>
+<h3 id="summing"><a class="header" href="#summing">Summing</a></h3>
+<p>Tensor networks cannot neatly describe some compound structures/operations.<br>
+For instance, residuals often take a different form than their alternate path. <br>
+Hence, it is easier view the whole as a sum of compatible networks.</br></br></p>
+<blockquote>
+<p>Networks are compatible when all outgoing wires are equal (same dimension and 'meaning').</p>
+</blockquote>
+<div class="center">
+<object data="composition/summing.svg"></object>
+<p> <i>Two compatible but differently-structured networks instantiating a 4th order tensor.</i> </p>
+</div>
+<p>These boxes retain all properties of tensor networks, despite their internals being more intricate.</p>
+<p>Even if networks can be merged natively, this logical split is often preferred for code and reasoning.
+Along the same lines, to avoid clutter, common modules are denoted as a colored box.</p>
+<h3 id="doubling"><a class="header" href="#doubling">Doubling</a></h3>
+<p>Throughout, many diagrams contain several identical input wires, either due to composing layers or due to the innate structure of certain modules.</p>
+<div class="center">
+<object data="composition/stacking.svg"></object>
+<p><i>Stacking layers hierarchically results in exponentially many copied inputs.</i></p>
+</div>
+<p>This leads to highly symmetric networks, which leads to notational clutter.
+To avoid this, we introduce new notation which highlights such structure, called doubling.</p>
+<div class="center">
+<object data="composition/doubling.svg"></object>
+<p> <i>Doubling removes duplicate paths, improving visual clarity.</i> </p>
+</div>
+<blockquote>
+<p>Doubling breaks the property of being able to count the tensor order given loose wires.</p>
+</blockquote>
+<p>It generally makes most sense to look at diagrams with doubling.
+However, sometimes the full diagrams are required to formally verify some statement.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="summary-2"><a class="header" href="#summary-2">Summary</a></h1>
+<p>All prominent building blocks within neural network design can be written as a tensor network.<br>
+Often, the only requirement is replacing ordinary activation functions with multiplicative variants.</br></p>
+<p>For instance, MLPs can be replaced with bilinear layers, a commonly used tensor representation.
+Many modern architectures chunk inputs into sequences where each entry is handled similarly.<br>
+We discussed the differences and similarities between mixers, convolutions and attention.</br></p>
+<p>In short, this formal diagrammatic language helps reason about their structure and composition.
+The next chapter shows another advantage; these networks are thoroughly studied in the literature.
+There exist sophisticated algorithms to compute global metrics, that are otherwise intractable.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="decompositions"><a class="header" href="#decompositions">Decompositions</a></h1>
+<p>Decompositions aim to break down matrices (or tensors) into simpler (to understand) components.
+Rank decompositions are by far most common, factorising matrices into sums of outer products.
+By ordering these factors by importance, one often finds meaningful and informative structures.
+For rank specifically, one can bound the number of required factors to reach exact reconstruction.
+Hence, one can optimally trade off accuracy for 'effort' by only considering the highest components.</p>
+<p>This chapter focusses on such rank-decompositions, specifically how to compute them efficiently.
+However, instead of decomposing tensors directly, we decompose the wires connecting them.
+This corresponds to ordering these based on global importance, structuring matrix communication.
+Intuitively, this 'aligns' consecutive matrices with each other, but in a globally informed manner.
+In practice, we find that this approach strongly outperforms any local algorithms like SVD.</p>
+<blockquote>
+<p>This chapter explains these algorithms and is hence the most technical part of this book.
+If you aren't particularly interested in the implementation details, it is recommended to skim this section to understand the main intuitions.</p>
+</blockquote>
+<h3 id="rank-versus-sparsity"><a class="header" href="#rank-versus-sparsity">Rank versus sparsity</a></h3>
+<p>The last few decades has seen a shift from rank-based toward sparsity-based methods.
+Sparsity is a good proxy toward useful and interpretable structures.
+While the algorithms in this sections are explained for full model decompositions, they can (and should) be combined with sparsity-based methods.</p>
+<h3 id="algorithm-overview"><a class="header" href="#algorithm-overview">Algorithm overview</a></h3>
+<p>The algorithm presented in this section relies on 'gauge freedom'.
+This is a fancy word for invariances within the tensor representation.
+Specifically, a matrix along with its inverse can be inserted and contracted away at any given wire.
+This changes the internal tensors (in this case \(A \neq A'\) and \(B \neq B'\)) without changing the whole.</p>
+<div class="center"><object data="diagrams/gauge.svg"></object></div>
+<p>These freedoms are everywhere within neural networks but are generally not exploited because meaningful transformations are hard to define and compute.</p>
+
+<blockquote>
+<p>WIP</p>
+</blockquote>
+<p>This algorithm works in two steps:</p>
+<ul>
+<li><strong>Orthogonalisation</strong> preprocesses the network, into a structure called the 'canonical form'.</li>
+<li><strong>Diagonalisation</strong> leverages those properties to order all wires by importance.</li>
+</ul>
+<p>Both routines are really fast, only requiring handful of carefully-selected eigendecompositions.</p>
+<h3 id="gauge-example"><a class="header" href="#gauge-example">Gauge example</a></h3>
+<p>While there exist many families of meaningful gauges, this chapter focusses on spectral variants.
+Consider the query and key matrices in the attention mechanism.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="orthogonalisation"><a class="header" href="#orthogonalisation">Orthogonalisation</a></h1>
+<p>The singular value decomposition splits any matrix into two orthogonal matrices and a diagonal matrix.
+Orthogonal matrices satisfy almost all criteria of 'nice' matrices, making them easy to work with.
+The same holds for diagonal matrices, which can simply be seen as a scaling operation.</p>
+<p>This idea can be extended to full (acyclic) tensor networks, transforming each part into a diagonal or orthogonal tensor.
+Tensor networks that admit this structure are often called 'canonical'.</p>
+<h3 id="why-orthogonalise"><a class="header" href="#why-orthogonalise">Why orthogonalise?</a></h3>
+<p>Within circuit analysis, a common operation is to trace between two points and back.
+For instance, tracing between two tokens through an attention head, measuring how much these tokens attend to each other.
+This generally involves multiplying a subnetwork with its (gently modified) transpose.
+In an orthogonalised network, the multiplication with its transpose will cancel out, greatly simplifiying these computations.</p>
+<p>Furthermore, computing the norm within such networks is trivial (since that relies on multiplication with its transpose as well).
+This is quite handy for interpretability since its often useful how much of the variance is explained by some subnetwork.</p>
+<h3 id="algorithm-overview-1"><a class="header" href="#algorithm-overview-1">Algorithm overview</a></h3>
+<p>The orthogonalisation algorithm is recursive in nature, consisting of two steps.</p>
+<ol>
+<li>Decompose a given tensor into orthogonal and non-orthogonal parts.</li>
+<li>Contract the non-orthogonal part into the neighbouring tensor.</li>
+</ol>
+<p>Rinse and repeat, starting from the inputs toward the output.</p>
+<h3 id="the-algorithm"><a class="header" href="#the-algorithm">The algorithm</a></h3>
+<p>This section conveys the intuition of the algorithm using a naive approach.
+The 'tricks' to make it efficient is explained afterward.
+Furthermore, we focus on stacked bilinear layers (deep MLPs).
+Adaptations to other architectures are explained later.</p>
+<p>A bilinear layer (left) can be flattened into a matrix (middle).
+This is generally denoted as combining two wires into a thick wire.</p>
+
+<p>Since \(B\) is now a wide matrix, we can perform SVD (right).
+The result is a wide orthogonal matrix \(V\) and a small non-orthogonal part \(US\).</p>
+<div class="center"><object data="diagrams/svd.svg"></object></div>
+<p>If we multiply the bilinear layer with its transpose (left) and compute the same SVD (middle), the wide \(V\) tensor vanishes (right).
+Hence, replacing the bilinear layer with \(V\) and pushing up the \(US\) matrix completes the local orthogonalisation.</p>
+<div class="center"><object data="diagrams/gram.svg"></object></div>
+<p>More interestingly, this works hierarchically.
+If the first layer is orthogonalised, performing the same operation on the second layer will orthogonalise the whole.</p>
+<div class="center"><object data="diagrams/multi.svg"></object></div>
+<p>Doing this on the whole network yields a stack of orthogonal tensors and a non-orthogonal matrix at the network output.</p>
+<h3 id="direct-orthogonalisation"><a class="header" href="#direct-orthogonalisation">Direct orthogonalisation</a></h3>
+
+<div style="break-before: page; page-break-before: always;"></div><h1 id="diagonalisation"><a class="header" href="#diagonalisation">Diagonalisation</a></h1>
+<p>Since direct orthogonalisation uses an eigendecomposition, each tensor is already ordered by local importance.
+However, its possible to do better, tensors can be ordered with respect to any point in the network (often the output).</p>
+<h3 id="preliminaries"><a class="header" href="#preliminaries">Preliminaries</a></h3>
+<p>One advantage of using tensor networks is that they readily reveal structure within tensors.
+Mathematicians past toiled tirelessly so we could plagiarise their lemmas.</p>
+<p>One such lemma is that performing SVD on the (flattened) tensor product of two matrices is equal to performing SVD separately and then taking the tensor product of each part.</p>
+<div class="center"><object data="diagrams/separable.svg"></object></div>
+<p>The proof is based on the fact that SVD is unique (when ordered by singular values).
+Since the left side is a valid decomposition, performing the 'full' decomposition will be equivalent.</p>
+<p>The full network can be split, into a pre tensor (upstream) and a post tensor (downstream).
+This shows all duplicated inputs are fully separable and equal.
+Hence, computing the SVD on one such wire is sufficient to find the best global decomposition.</p>
+<div class="center"><object data="diagrams/flattened.svg"></object></div>
+<p>Due to the orthogonalisation, the pre tensor is already orthogonal, and hence valid right singular vectors for the SVD.</p>
+<div class="center"><object data="diagrams/rsv.svg"></object></div>
+<p>Hence, we only need to compute the left singular vectors and singular values from the post tensor.
+Fortunately, that's also easy. Multiplying with the post tensor's transpose would yield a huge tensor.
+However, since all hidden wires are equal, these can be connected, yielding the following matrix.</p>
+<div class="center"><object data="diagrams/lsv.svg"></object></div>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="extensions"><a class="header" href="#extensions">Extensions</a></h1>
+<blockquote>
+<p>This is by far the most difficult part of this book.
+Many of these findings took the authors days to understand and are explained quickly and hand-waivingly in a few paragraphs.</p>
+</blockquote>
+<h3 id="architectural-generalisations"><a class="header" href="#architectural-generalisations">Architectural generalisations</a></h3>
+<p>Tensor networks corresponding to (stacks of) bilinear layers are often called tree tensor networks.
+These are extremely well-studied due to their appealing properties.
+Within trees, the leaves are the input and the root the output.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="summary-3"><a class="header" href="#summary-3">Summary</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="interpretability"><a class="header" href="#interpretability">Interpretability</a></h1>
+<p>This chapter proposes a new compositional framework for interpretability.</p>
+<p>Mechanistic interpretability aims to decompile neural networks into computer programs.<br>
+The envisioned approach uses features/variables and circuits/functions.</br></p>
+<p>....</p>
+<p>We propose a similar framework.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="weights--activations"><a class="header" href="#weights--activations">Weights &amp; Activations</a></h1>
+<p>There is a deep dependence between the input dataset and the weights of a model.<br/>
+However, it's somewhat difficult to make this precise in a way that is useful for interpretability.
+Within tensor networks, the inputs are simply a linear layer which converts an input index to some embedding.
+This view results in several insights:</p>
+<h3 id="input-vs-weight-based-is-an-off-by-one-error"><a class="header" href="#input-vs-weight-based-is-an-off-by-one-error">Input vs weight-based is an off-by-one error</a></h3>
+<p>Since augmenting a tensor network with inputs yields another tensor network, the analysis is identical.
+The interpretation is different however, until now, we studied tensor networks between input space and output.
+Prepending the input results in a tensor network between sample space and output.
+The latter provides information about the similarity of samples (instead of pixels or words).</p>
+<h3 id="inputs-are-barriers-between-feature-and-sequence-space"><a class="header" href="#inputs-are-barriers-between-feature-and-sequence-space">Inputs are barriers between feature and sequence space</a></h3>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="sparsity"><a class="header" href="#sparsity">Sparsity</a></h1>
+<p>Recent interpretability has strongly steered toward sparsity as a proxy to find meaningful features.
+Specifically, sparse dictionary learning aims to build an overcomplete basis, such that as little</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="structure"><a class="header" href="#structure">Structure</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><h1 id="superposition"><a class="header" href="#superposition">Superposition</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="summary-4"><a class="header" href="#summary-4">Summary</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="experiments"><a class="header" href="#experiments">Experiments</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="chess"><a class="header" href="#chess">Chess</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="tradeoffs"><a class="header" href="#tradeoffs">Tradeoffs</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="conclusion"><a class="header" href="#conclusion">Conclusion</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="future-work"><a class="header" href="#future-work">Future Work</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="appendix"><a class="header" href="#appendix">Appendix</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="glossary"><a class="header" href="#glossary">Glossary</a></h1>
+
+
+<div style="break-before: page; page-break-before: always;"></div><h1 id="normalisation-1"><a class="header" href="#normalisation-1">Normalisation</a></h1>
+<p>Multi-linear operations (especially on copies of itself) are not Lipshitz continuous.
+The sharpness of these functions are not bounded by linear functions but by polynomials.
+Specifically, the norm of activations passed through a bilinear layer can only be bounded by its square.</p>
+<p>\[ \exists c: ||Lx \odot Rx||_2 &lt; c ||x||^2_2 \]</p>
+<p>A back-of-the-envelope calculation shows this bound grows exponentially (\(2^n\)) when stacking layers.
+It shouldn't be surprising that stacking only a few immediately leads to (extremely) unstable training.
+Note that the same holds for attention, which also performs element-wise multiplications.</p>
+<p>Prior normalisation techniques such as batch normalisation, which divide by the average of the norm, are not equipped to resolve this.
+Mathematically, batchnorm merely reduces the constant on the Lipshitz continuity.
+When variance in sample norm is too high, batchnorm will fail at regularising.</p>
+<p>Hence, any architecture that extensively uses self-multiplication relies on instance-based norms.
+These norms generally discard the magnitude component, while retaining the direction.
+The most common normalisation simply divides each activation by its \(L_2\) norm.</p>
+<p>\[ \exists c: \left|\left|\dfrac{Lx}{||x||_2} \odot \dfrac{Rx}{||x||_2}\right|\right|_2 &lt; c  \]</p>
+<p>The result is guaranteed Lipshitz-continuity.
+Note that only this normalisation operation <em>perfectly</em>  cancels out the left-hand-side, which is probably the reason it works so well.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="invariants"><a class="header" href="#invariants">Invariants</a></h1>
+<p>Converting neural networks into their tensor variant requires each layers to satisfy one criterion: the first dimension should contain a constant value.
+This appendix covers one edge-case that isn't covered in the main text. Specifically</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="spiders"><a class="header" href="#spiders">Spiders</a></h1>
+<p>Diagrams in this book extensively use element-wise multiplication, written as a black circle.<br/>
+But what does that mean and why this operation allowed in tensor networks?</p>
+<p>Actually, this little dot is a tensor as well, specifically, a generalised identity tensor.<br/>
+This operation is often referred to as a spider, because it has many legs.</p>
+<div class="center">
+<img src="appendix/spiders/spider.svg" width="100px"/>
+<p><i>A spider (eyes added for dramatic effect).</i></p>
+</div>
+<p>Spiders are identity (Kronecker) tensors; zero everywhere except ones on the diagonal.<br/>
+For example, a second-order spider is exactly an identity matrix.</p>
+<div class="center">
+<img src="appendix/spiders/identity.svg" width="100px"/>
+<p><i>Connecting two wires with a spider does nothing. </i></p>
+</div>
+<p>In higher orders, this diagonal structure means wires can only interact through equal dimensions.
+For instance, the spider in the bilinear layer only allows interactions between the same dimension.</p>
+<p>Matrices before and after perform all the 'shuffling' of information.
+Hence, spiders can be seen as summing over all indices of the connected tensor.</p>
+<h3 id="comparison-with-full-tensors"><a class="header" href="#comparison-with-full-tensors">Comparison with full tensors</a></h3>
+<h3 id="merging-spiders"><a class="header" href="#merging-spiders">Merging spiders</a></h3>
+<div class="center">
+<img src="appendix/spiders/merging.svg" width="220px"/>
+<p><i>Two adjacent spiders can be combined into a larger spider. </i></p>
+</div>
+<p>While this book often keeps spiders separated for visual clarity, this may be easier to reason about.</p>
+<p>Spiders are undeniably the lifeblood of tensor networks, they allow matrices to be combined in interesting and expressive ways.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="squared-attention"><a class="header" href="#squared-attention">Squared Attention</a></h1>
+
+<div style="break-before: page; page-break-before: always;"></div><h1 id="documentation"><a class="header" href="#documentation">Documentation</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="modules"><a class="header" href="#modules">Modules</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><h1 id="bilinear"><a class="header" href="#bilinear">Bilinear</a></h1>
+<p>The <code>Bilinear</code> class represents the main building block for our networks.
+While all operations on this objects are simple to implement in code, the mathematical reasoning isn't.
+Hence, we this section described this class function by function.</p>
+<h2 id="representation"><a class="header" href="#representation">Representation</a></h2>
+<p>Any bilinear form can be represented by a matrix, just like any linear operation is represented by a vector.
+However, we want to perform multiple operations on any given input.
+Just as a matrix performs multiple linear operations, a third-order tensor can perform multiple bilinear operations.</p>
+<p>Representing a third-order tensor requires \(n^3\) parameters/weights, which is often intractable for neural networks.
+Hence, we represent this tensor using a decomposition.</p>
+<p>While there exist many, we opt for the canonical decomposition, which can be seen as an SVD but for three modes.
+Basically, it has an implicit diagonal third-order tensor and then a matrix at each mode.</p>
+<p>Often, an input is up-projected, just like in an ordinary MLP, before performing the square, afterwards it is down-projected again. This has been found to work well in practice and has been hypothesized to be where models store their factual knowledge. Formally, though, it is increasing the tensor rank.</p>
+<h2 id="initialization"><a class="header" href="#initialization">Initialization</a></h2>
+<p>This class is often not used directly as a neural network component (even though it could). Instead, there is a separate class that is optimized for speed for that use-case. The main reason is that a bilinear layer needs to handle the biases (and residual) as an extra dimension, which can be detrimental to performance due to how GPUs work. Hence, the ubiquitous <code>nn.Linear</code> is used for training.</p>
+<p>There are three common functions to instantiate a bilinear layer. The first, <code>make_bilinear</code>, takes three <code>nn.Linear</code> as argument, which correspond to the modes. It automatically incorporates the biases into the bilinear as the first dimension (since it often turns out to be the most important one).</p>
+
+<h2 id="functions"><a class="header" href="#functions">Functions</a></h2>
+<p>This component includes many common operations that one could wish to perform on it. Many operations have two versions, in-place and cloning. Following PyTorch convention, in-place operations are postfixed with an underscore.</p>
+<h3 id="symmetrization"><a class="header" href="#symmetrization">Symmetrization</a></h3>
+<p>When tracing through or considering a layer in a decomposition. The two input matrices present two differing paths. This can lead to an exponential number of paths when considering multiple layers. Hence, it is advantageous to symmetrize the input matrices. This essentially turns the bilinear layer into a squared activation function, often at some 'cost'.</p>
+<p>One way to symmetrize is by doubling the hidden dimension, allowing the information of either side to be combined into a single matrix.</p>
+<pre><code class="language-python">p = 0.5 * torch.cat([self.p, -self.p], dim=1)
+lr = torch.cat([self.l + self.r, self.l - self.r], dim=0)
+return Bilinear(lr, lr, p)
+</code></pre>
+<p>Working this out, we get the following. We ignore the $p$ and view that as $1$ and $-1$ for simplicity.</p>
+<p>\[ (l + r)(l + r) - (l - r)(l - r) = (l^2 + 2lr + r^2) - (l^2 - 2lr + r^2) = 4lr\]</p>
+<p>Basically, this setup uses a nifty trick where the purely quadratic terms, not present in the bilinear layer, cancel out. Only the cross-interacting terms, which we want, remain.</p>
+<blockquote>
+<p>TODO: complex symmetrization</p>
+</blockquote>
+<h3 id="change-of-basis"><a class="header" href="#change-of-basis">Change of basis</a></h3>
+<p>At its core, a bilinear layer basically consists of a square, surrounded by two changes of basis. Commonly, we wish to fold matrices into either side (input/output) as part of our analysis. We define two functions to this end.</p>
+<ul>
+<li><strong>fold</strong>: contracts a matrix into the both input matrices.</li>
+<li><strong>project</strong>: contracts a matrix into the output matrix.</li>
+</ul>
+<h3 id="algebraic-operations"><a class="header" href="#algebraic-operations">Algebraic operations</a></h3>
+<p>Bilinear layers have built-in support for scalar multiplication as well as two kinds of addition.</p>
+<p>The first kind of addition, denoted as the + operation, implements a 'natural' addition of bilinear layers.</p>
+<p>\[ x' = xAx + xBx \]</p>
+<p>The second kind, denoted as ^, is a concatenation which roughly computes the following.</p>
+<p>\[ (x' ~ y') = (x ~ y)(A ~ B)(x ~ y) \]</p>
+<p>The former is commonly used when working with a sole bilinear layer, the latter is used when the bilinear layer is part of a larger object.</p>
+<h3 id="singular-vectors"><a class="header" href="#singular-vectors">Singular vectors</a></h3>
+<p>Many analysis methods used in this repo rely on the use of spectral decomposition. Hence, we often need to compute right- and left singular vectors.</p>
+<p>Computing singular vectors is basically multiplying a matrix (or bilinear layer) with its transpose. Let's start with left-singular vectors.</p>
+<div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><h1 id="compositions"><a class="header" href="#compositions">Compositions</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="sequential"><a class="header" href="#sequential">Sequential</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="dual"><a class="header" href="#dual">Dual</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div>
+</main>
+<nav aria-label="Page navigation" class="nav-wrapper">
+
+<div style="clear: both"></div>
+</nav>
+</div>
+</div>
+<nav aria-label="Page navigation" class="nav-wide-wrapper">
+</nav>
+</div>
+<script>
+            window.playground_copyable = true;
+        </script>
+<script src="elasticlunr.min.js"></script>
+<script src="mark.min.js"></script>
+<script src="searcher.js"></script>
+<script src="clipboard.min.js"></script>
+<script src="highlight.js"></script>
+<script src="book.js"></script>
+
+<script>
+        window.addEventListener('load', function() {
+            MathJax.Hub.Register.StartupHook('End', function() {
+                window.setTimeout(window.print, 100);
+            });
+        });
+        </script>
+</div>
+</body>
+</html>

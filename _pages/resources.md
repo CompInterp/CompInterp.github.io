@@ -1,13 +1,15 @@
 ---
 layout: page
-title: projects
-permalink: /projects/
-description: A growing collection of your cool projects.
+title: resources
+permalink: /resources/
+description:
 nav: true
-nav_order: 3
-display_categories: [work, fun]
+nav_order: 4
+display_categories:
 horizontal: false
 ---
+
+<!-- TODO: meme gallery project -->
 
 <!-- pages/projects.md -->
 <div class="projects">

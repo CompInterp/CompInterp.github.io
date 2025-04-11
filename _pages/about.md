@@ -2,7 +2,7 @@
 layout: about
 title: about
 permalink: /
-subtitle: # TODO: add VUB + UA
+subtitle:
 
 profile:
   align: right
@@ -23,9 +23,6 @@ latest_posts:
   scrollable: true # adds a vertical scroll bar if there are more than 3 new posts items
   limit: 3 # leave blank to include all the blog posts
 ---
-
-<!-- TODO: meme collection page -->
-<!-- TODO: add book as project, or better, separate page -->
 
 The **CompInterp** approach to interpretability treats weights and data as a unified modality to provide a compositional perspective on model design, analysis, and manipulation. By combining tensor and neural network paradigms, our $\chi$-nets pave the way for inherently interpretable AI without sacrificing performance.
 

@@ -11,7 +11,7 @@ profiles:
   # and create one content file for each profile inside _pages/
   - align: right
     image: ward.jpg
-    content: about_ward.md # TODO: complete profile
+    content: about_ward.md
     image_circular: false # crops the image to make it circular
     more_info: >
       <a href="https://wardgauderis.github.io/">wardgauderis.github.io</a>
