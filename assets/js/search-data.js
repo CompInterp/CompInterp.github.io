@@ -23,6 +23,13 @@ ninja.data = [{
           handler: () => {
             window.location.href = "/people/";
           },
+        },{id: "nav-resources",
+          title: "resources",
+          description: "",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/resources/";
+          },
         },{id: "books-the-godfather",
           title: 'The Godfather',
           description: "",
@@ -34,7 +41,12 @@ ninja.data = [{
           section: "News",},{id: "news-we-have-a-website-now-sparkles",
           title: 'We have a website now! :sparkles:',
           description: "",
-          section: "News",},{
+          section: "News",},{id: "projects-compinterp-tutorial",
+          title: 'CompInterp tutorial',
+          description: "a WIP introduction to CompInterp",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/tutorial/";
+            },},{
         id: 'social-email',
         title: 'email',
         section: 'Socials',
