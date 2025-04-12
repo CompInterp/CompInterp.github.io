@@ -41,9 +41,14 @@ ninja.data = [{
           section: "News",},{id: "news-we-have-a-website-now-sparkles",
           title: 'We have a website now! :sparkles:',
           description: "",
-          section: "News",},{id: "projects-compinterp-tutorial",
+          section: "News",},{id: "projects-memetical-compositions",
+          title: 'Memetical Compositions',
+          description: "Why publish papers when you can compose memes?",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/memes/";
+            },},{id: "projects-compinterp-tutorial",
           title: 'CompInterp tutorial',
-          description: "a WIP introduction to CompInterp",
+          description: "A WIP introduction to CompInterp",
           section: "Projects",handler: () => {
               window.location.href = "/projects/tutorial/";
             },},{
