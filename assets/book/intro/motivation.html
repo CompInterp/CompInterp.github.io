@@ -1,0 +1,217 @@
+<!DOCTYPE HTML>
+
+<html class="light sidebar-visible" dir="ltr" lang="en">
+<head>
+
+<meta charset="utf-8"/>
+<title>Motivation - Compositional Interpretability</title>
+
+<meta content="" name="description"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="#ffffff" name="theme-color"/>
+<link href="../favicon.svg" rel="icon"/>
+<link href="../favicon.png" rel="shortcut icon"/>
+<link href="../css/variables.css" rel="stylesheet"/>
+<link href="../css/general.css" rel="stylesheet"/>
+<link href="../css/chrome.css" rel="stylesheet"/>
+<link href="../css/print.css" media="print" rel="stylesheet"/>
+
+<link href="../FontAwesome/css/font-awesome.css" rel="stylesheet"/>
+<link href="../fonts/fonts.css" rel="stylesheet"/>
+
+<link href="../highlight.css" id="highlight-css" rel="stylesheet"/>
+<link href="../tomorrow-night.css" id="tomorrow-night-css" rel="stylesheet"/>
+<link href="../ayu-highlight.css" id="ayu-highlight-css" rel="stylesheet"/>
+
+<link href="../style.css" rel="stylesheet"/>
+
+<script async="" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<script>
+            const path_to_root = "../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+        </script>
+
+<script src="../toc.js"></script>
+</head>
+<body>
+<div id="body-container">
+
+<script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+<script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+<input class="hidden" id="sidebar-toggle-anchor" type="checkbox"/>
+
+<script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+<nav aria-label="Table of contents" class="sidebar" id="sidebar">
+
+<mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+<noscript>
+<iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+</noscript>
+<div class="sidebar-resize-handle" id="sidebar-resize-handle">
+<div class="sidebar-resize-indicator"></div>
+</div>
+</nav>
+<div class="page-wrapper" id="page-wrapper">
+<div class="page">
+<div id="menu-bar-hover-placeholder"></div>
+<div class="menu-bar sticky" id="menu-bar">
+<div class="left-buttons">
+<label aria-controls="sidebar" aria-label="Toggle Table of Contents" class="icon-button" for="sidebar-toggle-anchor" id="sidebar-toggle" title="Toggle Table of Contents">
+<i class="fa fa-bars"></i>
+</label>
+<button aria-controls="theme-list" aria-expanded="false" aria-haspopup="true" aria-label="Change theme" class="icon-button" id="theme-toggle" title="Change theme" type="button">
+<i class="fa fa-paint-brush"></i>
+</button>
+<ul aria-label="Themes" class="theme-popup" id="theme-list" role="menu">
+<li role="none"><button class="theme" id="default_theme" role="menuitem">Auto</button></li>
+<li role="none"><button class="theme" id="light" role="menuitem">Light</button></li>
+<li role="none"><button class="theme" id="rust" role="menuitem">Rust</button></li>
+<li role="none"><button class="theme" id="coal" role="menuitem">Coal</button></li>
+<li role="none"><button class="theme" id="navy" role="menuitem">Navy</button></li>
+<li role="none"><button class="theme" id="ayu" role="menuitem">Ayu</button></li>
+</ul>
+<button aria-controls="searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-label="Toggle Searchbar" class="icon-button" id="search-toggle" title="Search. (Shortkey: s)" type="button">
+<i class="fa fa-search"></i>
+</button>
+</div>
+<h1 class="menu-title">Compositional Interpretability</h1>
+<div class="right-buttons">
+<a aria-label="Print this book" href="../print.html" title="Print this book">
+<i class="fa fa-print" id="print-button"></i>
+</a>
+</div>
+</div>
+<div class="hidden" id="search-wrapper">
+<form class="searchbar-outer" id="searchbar-outer">
+<input aria-controls="searchresults-outer" aria-describedby="searchresults-header" id="searchbar" name="searchbar" placeholder="Search this book ..." type="search"/>
+</form>
+<div class="searchresults-outer hidden" id="searchresults-outer">
+<div class="searchresults-header" id="searchresults-header"></div>
+<ul id="searchresults">
+</ul>
+</div>
+</div>
+
+<script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+<div class="content" id="content">
+<main>
+<h1 id="motivation"><a class="header" href="#motivation">Motivation</a></h1>
+<h3 id="why-composition-matters"><a class="header" href="#why-composition-matters">Why composition matters</a></h3>
+<p>Standard activation functions (such as ReLU, Sigmoid, etc.) are inherently non-compositional.
+Consider any set of input features that activates an output: ablating any of them could ‘switch off’ the ReLU.
+Each feature depends on the others; subsets of the input cannot be considered separately as this changes the outputs unrecoverably.
+Examining these activation functions thus requires the whole input.
+Consequently, weights cannot be meaningfully decomposed and circuits cannot be generally understood.<sup class="footnote-reference" id="fr-1-1"><a href="#footnote-1">1</a></sup>
+In other words, non-compositional activation functions shroud the high-level relation between inputs, outputs and weights.
+This is why adequately describing feature interactions has remained an open problem in interpretability.</p>
+<h3 id="compositional-activation-functions"><a class="header" href="#compositional-activation-functions">Compositional activation functions</a></h3>
+<p>Fortunately, there exist compositional activation functions.
+Consider a linear layer followed by a squared activation function --- the simplest non-linear polynomial --- written as \( (A x)^2 \).
+We denote a single output as \( (a^T x)^2 \) where \(x\) is the input, and \(a\) is a matrix row for that output. This can be rewritten as follows:</p>
+<p>\[ (a^T x)^2 = (a^T x)^T (a^T x) = (x^T a) (a^T x) = x^T (a a^T) x = x^T Q x \]</p>
+<p>In other words, the square can be seen as an element-wise product between duplicated activations.
+This can rearranged into a single matrix \(Q\) (created by the outer product of \(a\) with itself) that defines how the outputs are created from a duplicated \(x\).
+Each entry in \(Q\) describes the interaction strength between any pair of input features.
+Notably, the output is precisely the sum of all weighted pairwise interactions.
+This means a given interaction will always be present (on different scales according to the input) and cannot be suppressed.
+A squared activation function’s feature composition is meaningful and can be described precisely.</p>
+<p>Formally, pairwise interactions form a linear basis for this activation function, which can be studied with well-known tools like SVD.
+This stack of interaction matrices can be seen as a third-order tensor, which describes a given layer exactly (and nicely).
+This clarifies why composition is helpful for interaction-based interpretability.</p>
+<h3 id="generalising-composition-using-tensors"><a class="header" href="#generalising-composition-using-tensors">Generalising composition using tensors</a></h3>
+<p>The quadratic activation can be generalised by allowing asymmetric interactions \((x^T a) (b^T x)\).<br/>
+This is called a bilinear layer and is an important building block for the remainder of this book.<br/>
+Bilinear layers are compositional and on par with common MLP layers, even in large transformers.</p>
+<p>This raises the question: <em>"what makes a layer compositional, for our purposes?"</em><br/>
+The answer is simple: <em>"everything that is describable by a tensor."</em></p>
+<p>The next section dives into what this means and how this can be used toward architectural design.</p>
+<h3 id="caveats"><a class="header" href="#caveats">Caveats</a></h3>
+<p>All proposed architectures are designed to incur minimal modifications and retain maximal accuracy.
+Despite this effort, it is impossible to guarantee these changes generalise accordingly across tasks.
+For instance, all transformer modifications have been tested up to GPT2 sized models and generally achieves loss parity.
+However, this may change at the largest of sizes or for specific tasks that weren't considered here.</p>
+<p>One instance in which the proposed architectures perform worse are low-data settings.
+Iterating over many epochs saturates our models quicker, while ReLU-based counterparts continue improving.</p>
+<hr/>
+<ol class="footnote-definition"><li id="footnote-1">
+<p>I am talking in a theoretic sense. In practice, some parts of ReLU-based networks contain near-decomposable structures that can be approximated well. However, we want to be able to analyse the parts of the networks that don't follow this pattern. <a href="#fr-1-1">↩</a></p>
+</li>
+</ol>
+</main>
+<nav aria-label="Page navigation" class="nav-wrapper">
+
+<a aria-keyshortcuts="Left" aria-label="Previous chapter" class="mobile-nav-chapters previous" href="../intro/main.html" rel="prev" title="Previous chapter">
+<i class="fa fa-angle-left"></i>
+</a>
+<a aria-keyshortcuts="Right" aria-label="Next chapter" class="mobile-nav-chapters next" href="../intro/networks.html" rel="next prefetch" title="Next chapter">
+<i class="fa fa-angle-right"></i>
+</a>
+<div style="clear: both"></div>
+</nav>
+</div>
+</div>
+<nav aria-label="Page navigation" class="nav-wide-wrapper">
+<a aria-keyshortcuts="Left" aria-label="Previous chapter" class="nav-chapters previous" href="../intro/main.html" rel="prev" title="Previous chapter">
+<i class="fa fa-angle-left"></i>
+</a>
+<a aria-keyshortcuts="Right" aria-label="Next chapter" class="nav-chapters next" href="../intro/networks.html" rel="next prefetch" title="Next chapter">
+<i class="fa fa-angle-right"></i>
+</a>
+</nav>
+</div>
+<script>
+            window.playground_copyable = true;
+        </script>
+<script src="../elasticlunr.min.js"></script>
+<script src="../mark.min.js"></script>
+<script src="../searcher.js"></script>
+<script src="../clipboard.min.js"></script>
+<script src="../highlight.js"></script>
+<script src="../book.js"></script>
+
+</div>
+</body>
+</html>

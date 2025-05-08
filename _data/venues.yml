@@ -1,3 +1,7 @@
-"CoLoRAI":
+"CoLoRAI @ AAAI":
   url: https://april-tools.github.io/colorai/
   color: "#f87244"
+
+"ICLR":
+  url: https://iclr.cc/
+  color: "#a0d625"

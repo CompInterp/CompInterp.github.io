@@ -394,7 +394,7 @@
         this.renderIfPossible();
       }
 
-      // potential TODO: check if this is enough for all our usecases
+      // potential TODO check if this is enough for all our usecases
       // maybe provide a custom function to tell if we have enough information to render
       renderIfPossible() {
         if (this.textContent && this.root) {
@@ -469,7 +469,7 @@
           }
         }
 
-        /* TODO: Are we using these? Should we even? */
+        /* TODO Are we using these? Should we even? */
         $(query) {
           return this.root.querySelector(query);
         }
@@ -788,7 +788,7 @@ ${math}
 
   DMath.katexAdded = false;
   DMath.inlineMathRendered = false;
-  window.DMath = DMath; // TODO: check if this can be removed, or if we should expose a distill global
+  window.DMath = DMath; // TODO check if this can be removed, or if we should expose a distill global
 
   // Copyright 2018 The Distill Template Authors
   //
@@ -1241,7 +1241,7 @@ ${math}
 
       onFootnoteChanged() {
         // const footnote = event.detail;
-        //TODO: optimize to only update current footnote
+        //TODO optimize to only update current footnote
         const footnotesList = document.querySelector("d-footnote-list");
         if (footnotesList) {
           const footnotes = document.querySelectorAll("d-footnote");
@@ -4388,7 +4388,7 @@ d-footnote-list a.footnote-backlink {
       // });
     }
 
-    // TODO: could optimize this to accept individual footnotes?
+    // TODO could optimize this to accept individual footnotes?
     set footnotes(footnotes) {
       this.list.innerHTML = "";
       if (footnotes.length) {

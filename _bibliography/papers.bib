@@ -1,9 +1,8 @@
 ---
 ---
 
-
 @inproceedings{dooms_compositionality_2024,
-  abbr={CoLoRAI},
+  abbr={CoLoRAI @ AAAI},
 	title = {Compositionality {Unlocks} {Deep} {Interpretable} {Models}},
 	url = {https://openreview.net/forum?id=bXAt5iZ69l},
 	urldate = {2025-02-17},
@@ -16,10 +15,29 @@
   arxiv = {2504.02667},
   bibtex_show = {true},
 	html = {https://openreview.net/forum?id=bXAt5iZ69l},
+  pdf = {https://openreview.net/pdf?id=bXAt5iZ69l},
   poster = {https://researchportal.vub.be/files/122390121/poster.pdf},
   slides = {CoLoRAI_2025_slides.pdf},
-  video = {https://www.youtube.com/embed/yUGZVPJlvzY?si=SwBRVPioiJZvIDE1},
+  video = {https://www.youtube.com/watch?v=yUGZVPJlvzY},
   preview = {chi_creature.png},
   selected={true}
 }
 
+
+@inproceedings{pearceBilinearMLPsEnable2024a,
+  abbr = {ICLR},
+  title = {Bilinear {{MLPs}} Enable Weight-Based Mechanistic Interpretability},
+  booktitle = {The {{Thirteenth International Conference}} on {{Learning Representations}}},
+  author = {Pearce, Michael T. and Dooms, Thomas and Rigg, Alice and Oramas, Jose and Sharkey, Lee},
+  year = {2024},
+  month = oct,
+  urldate = {2025-05-07},
+  abstract = {A mechanistic understanding of how MLPs do computation in deep neural net- works remains elusive. Current interpretability work can extract features from hidden activations over an input dataset but generally cannot explain how MLP weights construct features. One challenge is that element-wise nonlinearities introduce higher-order interactions and make it difficult to trace computations through the MLP layer. In this paper, we analyze bilinear MLPs, a type of Gated Linear Unit (GLU) without any element-wise nonlinearity that neverthe- less achieves competitive performance. Bilinear MLPs can be fully expressed in terms of linear operations using a third-order tensor, allowing flexible analysis of the weights. Analyzing the spectra of bilinear MLP weights using eigendecom- position reveals interpretable low-rank structure across toy tasks, image classifi- cation, and language modeling. We use this understanding to craft adversarial examples, uncover overfitting, and identify small language model circuits directly from the weights alone. Our results demonstrate that bilinear layers serve as an interpretable drop-in replacement for current activation functions and that weight- based interpretability is viable for understanding deep-learning models.},
+  langid = {english},
+  url = {https://openreview.net/forum?id=gI0kPklUKS},
+  arxive = {2410.08417},
+  html = {https://openreview.net/forum?id=gI0kPklUKS},
+  pdf = {https://openreview.net/pdf?id=gI0kPklUKS},
+  preview = {bilinear.png},
+  bibtex_show = {true},
+}
