@@ -30,11 +30,11 @@ ninja.data = [{
           handler: () => {
             window.location.href = "/resources/";
           },
-        },{id: "books-the-godfather",
-          title: 'The Godfather',
+        },{id: "books-compositional-interpretability",
+          title: 'Compositional Interpretability',
           description: "",
           section: "Books",handler: () => {
-              window.location.href = "/books/the_godfather/";
+              window.location.href = "/books/compinterp/";
             },},{id: "news-we-are-presenting-our-poster-at-colorai-aaai-2025",
           title: 'We are presenting our poster at CoLoRAI (AAAI 2025)!',
           description: "",
@@ -46,33 +46,12 @@ ninja.data = [{
           description: "Why publish papers when you can compose memes?",
           section: "Projects",handler: () => {
               window.location.href = "/projects/memes/";
-            },},{id: "projects-compinterp-tutorial",
-          title: 'CompInterp tutorial',
-          description: "A WIP introduction to CompInterp",
+            },},{id: "projects-compositional-interpretability",
+          title: 'Compositional Interpretability',
+          description: "A WIP book-form introduction",
           section: "Projects",handler: () => {
               window.location.href = "/projects/tutorial/";
             },},{
-        id: 'social-email',
-        title: 'email',
-        section: 'Socials',
-        handler: () => {
-          window.open("mailto:%77%61%72%64.%67%61%75%64%65%72%69%73@%76%75%62.%62%65", "_blank");
-        },
-      },{
-        id: 'social-github',
-        title: 'GitHub',
-        section: 'Socials',
-        handler: () => {
-          window.open("https://github.com/CompInterp", "_blank");
-        },
-      },{
-        id: 'social-rss',
-        title: 'RSS Feed',
-        section: 'Socials',
-        handler: () => {
-          window.open("/feed.xml", "_blank");
-        },
-      },{
       id: 'light-theme',
       title: 'Change theme to light',
       description: 'Change the theme of the site to Light',
