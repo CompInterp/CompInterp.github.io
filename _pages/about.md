@@ -11,7 +11,7 @@ profile:
   more_info: >
     Our latest <a href="https://www.youtube.com/watch?v=yUGZVPJlvzY">hit single</a>
 selected_papers: true # includes a list of papers marked as "selected={true}"
-social: true # includes social icons at the bottom of the page
+social: false # includes social icons at the bottom of the page
 
 announcements:
   enabled: true # includes a list of news items
@@ -24,14 +24,21 @@ latest_posts:
   limit: 3 # leave blank to include all the blog posts
 ---
 
-The **CompInterp** approach to interpretability treats weights and data as a unified modality to provide a compositional perspective on model design, analysis, and manipulation. By combining tensor and neural network paradigms, our $\chi$-nets pave the way for inherently interpretable AI without sacrificing performance.
+<!-- The **CompInterp** approach to interpretability treats weights and data as a unified modality to provide a compositional perspective on model design, analysis, and manipulation. By combining tensor and neural network paradigms, our $\chi$-nets pave the way for inherently interpretable AI without sacrificing performance.
 
 **$\chi$-nets** are compositional by design, both in how they are built and in the representations they learn. Their architecture enables mathematical guarantees and weight-based subcircuit analysis, grounding interpretability in formal (de)compositions rather than post-hoc activation-based approximations.
 
-We're currently scaling CompInterp methods to CNNs and transformers by leveraging their specialised low-rank structure. Learn more about it in our [latest talk](https://www.youtube.com/watch?v=yUGZVPJlvzY)!
+We're currently scaling CompInterp methods to CNNs and transformers by leveraging their specialised low-rank structure. Learn more about it in our [latest talk](https://www.youtube.com/watch?v=yUGZVPJlvzY)! -->
+
+Compositional interpretability aims to uncover the structure of neural representations, revealing how simple features compose into sophisticated behaviours. Combining tensor and neural network paradigms paves the way for inherently interpretable AI without sacrificing performance. This approach treats weights and data as a unified modality and provides a formal perspective on model analysis, steering and design.
+
+Compositional architectures enable weight-based subcircuit analysis and grounding interpretability in formal (de)compositions rather than post-hoc activation-based approximations. This allows flexible analysis at any granularity. Compositional models can be described using (polynomial) non-linearities, embracing the inherent hierarchies in models rather than obscuring them through linear approximations.
+
+We're currently scaling compositional interpretability to transformers and CNNs by leveraging modern advances in tensor networks and information theory. Learn more about it in our [latest talk](https://www.youtube.com/watch?v=yUGZVPJlvzY)!
 
 <!-- prettier-ignore-start -->
 *[compositionality]: Compositionality is the algebraic capacity to understand and produce novel combinations from known components.
 
-*[inherently]: read: compositionally
+*[flexible]: read basis-invariant
+
 <!-- prettier-ignore-end -->
