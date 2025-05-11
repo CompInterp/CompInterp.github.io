@@ -30,12 +30,7 @@ ninja.data = [{
           handler: () => {
             window.location.href = "/resources/";
           },
-        },{id: "books-compositional-interpretability",
-          title: 'Compositional Interpretability',
-          description: "",
-          section: "Books",handler: () => {
-              window.location.href = "/books/compinterp/";
-            },},{id: "news-we-are-presenting-our-poster-at-colorai-aaai-2025",
+        },{id: "news-we-are-presenting-our-poster-at-colorai-aaai-2025",
           title: 'We are presenting our poster at CoLoRAI (AAAI 2025)!',
           description: "",
           section: "News",},{id: "news-we-have-a-website-now-sparkles",
@@ -52,6 +47,20 @@ ninja.data = [{
           section: "Projects",handler: () => {
               window.location.href = "/projects/tutorial/";
             },},{
+        id: 'social-discord',
+        title: 'Discord',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://discord.gg/psNd4Dmd6H", "_blank");
+        },
+      },{
+        id: 'social-email',
+        title: 'email',
+        section: 'Socials',
+        handler: () => {
+          window.open("mailto:%77%61%72%64.%67%61%75%64%65%72%69%73@%76%75%62.%62%65,%64%6F%6F%6D%73%74%68%6F%6D%61%73@%67%6D%61%69%6C.%63%6F%6D", "_blank");
+        },
+      },{
       id: 'light-theme',
       title: 'Change theme to light',
       description: 'Change the theme of the site to Light',

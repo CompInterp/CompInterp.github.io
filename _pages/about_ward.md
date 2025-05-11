@@ -1,9 +1,7 @@
 ## **Ward** Gauderis
 
 Hello!
-I'm a PhD researcher at the Computational Creativity Lab within the Artificial Intelligence Research Group at the Vrije Universiteit Brussel, supervised by Prof. Dr. Dr. Geraint Wiggins.
-
-I study **compositionality** in AI --- how explicit structure and emergent behaviour interact in intelligent systems. My work bridges symbolic and sub-symbolic AI, with a focus on models that are inherently interpretable by design and can reason and create in human-like ways.
+I'm a PhD researcher studying **compositionality** in AI --- how explicit structure and emergent behaviour interact in intelligent systems. My work bridges symbolic and sub-symbolic AI, with a focus on models that are inherently interpretable by design and can reason and create in human-like ways.
 
 **How can the _compositional design_ of a model's structure improve its _compositional behaviour_?**
 
@@ -12,5 +10,5 @@ My PhD project, Q-CHARM, explores this question by distinguishing between the ar
 <!-- prettier-ignore-start -->
 *[compositionality]: Compositionality is the algebraic capacity to understand and produce novel combinations from known components.
 
-*[inherently]: read: compositionally
+*[inherently]: read compositionally
 <!-- prettier-ignore-end -->
