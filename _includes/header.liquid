@@ -16,6 +16,8 @@
             {% if site.last_name %}
               {{- site.last_name -}}
             {% endif %}
+          {% elsif site.title == 'CompInterp' %}
+            <span class="font-weight-bold">Comp</span>Interp
           {% else %}
             {{- site.title -}}
           {% endif %}
