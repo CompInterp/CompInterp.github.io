@@ -24,7 +24,7 @@ latest_posts:
   limit: 3 # leave blank to include all the blog posts
 ---
 
-**CompInterp** uncovers the structure of neural representations, showing how simple features combine into complex behaviours.
+**CompInterp** uncovers the structure of neural representations, showing how simple features compose into complex behaviours.
 By unifying tensor and neural network paradigms, model weights and data are treated as a single modality. This compositional lens on design, analysis and control paves the way for inherently interpretable AI without compromising performance.
 
 Compositional architectures capture rich non-linear (polynomial) relationships between representation spaces. Instead of masking them through linear approximations, CompInterp methods expose their inherent hierarchical structure accross levels of abstraction.
