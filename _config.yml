@@ -2,10 +2,10 @@
 # Site settings
 # -----------------------------------------------------------------------------
 
-title: Compositional Interpretability # the website title (if blank, full name will be used instead)
-first_name:
+title: CompInterp # the website title (if blank, full name will be used instead)
+first_name: 
 middle_name:
-last_name:
+last_name: 
 contact_note: >
   Have a question? Want to collaborate? Feel free to reach out!
 description: > # the ">" symbol means to ignore newlines until "footer_text:"
@@ -14,7 +14,7 @@ footer_text:
 keywords: mechanistic interpretability, compositional AI, category theory, tensor networks, 
   neural networks, deep learning, machine learning, AI safety, AI alignment # add your own keywords or leave empty
 lang: en # the language of your site (for example: en, fr, cn, ru, etc.)
-icon: chi_creature.png # the emoji used as the favicon (alternatively, provide image name in /assets/img/)
+icon: logo_dark.svg # the emoji used as the favicon (alternatively, provide image name in /assets/img/)
 
 url: https://compinterp.github.io # the base hostname & protocol for your site
 baseurl: # the subpath of your site, e.g. /blog/. Leave blank for root
@@ -63,7 +63,7 @@ max_width: 930px
 # see https://schema.org/docs/faq.html for more information
 serve_og_meta: true # Include Open Graph meta tags in the HTML head
 serve_schema_org: true # Include Schema.org in the HTML head
-og_image: /assets/img/chi_creature.png # The site-wide (default for all links) Open Graph preview image
+og_image: /assets/img/logo_dark.svg # The site-wide (default for all links) Open Graph preview image
 
 # -----------------------------------------------------------------------------
 # Analytics and search engine verification
@@ -195,6 +195,7 @@ exclude:
   - _news/examples/
   - _projects/examples/
   - assets/examples/
+  - _books/
 keep_files:
   - CNAME
   - .nojekyll
@@ -208,7 +209,7 @@ plugins:
   - jekyll-imagemagick
   - jekyll-jupyter-notebook
   - jekyll-link-attributes
-  - jekyll-minifier
+  # - jekyll-minifier
   - jekyll-paginate-v2
   - jekyll-regex-replace
   - jekyll/scholar
@@ -380,16 +381,16 @@ lazy_loading_images: true # enables lazy loading of images (recommended)
 # -----------------------------------------------------------------------------
 
 enable_google_analytics: true # enables google analytics
-enable_cronitor_analytics: true # enables cronitor RUM analytics
-enable_pirsch_analytics: true # enables Pirsch analytics (https://pirsch.io/)
-enable_openpanel_analytics: true # enables Openpanel analytics (https://openpanel.dev/)
+enable_cronitor_analytics: false # enables cronitor RUM analytics
+enable_pirsch_analytics: false # enables Pirsch analytics (https://pirsch.io/)
+enable_openpanel_analytics: false # enables Openpanel analytics (https://openpanel.dev/)
 enable_google_verification: true # enables google site verification
 enable_bing_verification: true # enables bing site verification
 enable_masonry: true # enables automatic project cards arrangement
 enable_math: true # enables math typesetting (uses MathJax)
 enable_tooltips: true # enables automatic tooltip links generated for each section titles on pages and posts
 enable_darkmode: true # enables switching between light/dark modes
-enable_navbar_social: false # enables displaying social links in the navbar on the about page
+enable_navbar_social: true # enables displaying social links in the navbar on the about page
 enable_project_categories: true # enables categorization of projects into multiple categories
 enable_medium_zoom: true # enables image zoom feature (as on medium.com)
 enable_progressbar: true # enables a horizontal progress bar linked to the vertical scroll position

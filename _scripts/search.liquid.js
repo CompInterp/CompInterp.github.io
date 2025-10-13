@@ -122,7 +122,7 @@ ninja.data = [
         {%- when "discord_id" -%}
           {%- assign social_id = "social-discord" -%}
           {%- assign social_title = "Discord" -%}
-          {%- capture social_url %}"https://discord.com/users/{{ social[1] }}"{% endcapture -%}
+          {%- capture social_url %}"https://discord.gg/{{ social[1] }}"{% endcapture -%}
         {%- when "email" -%}
           {%- assign social_id = "social-email" -%}
           {%- assign social_title = "email" -%}
