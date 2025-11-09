@@ -3,7 +3,7 @@ layout: page
 title: Memetical Compositions
 description: Why publish papers when you can compose memes?
 img: assets/img/meme/adventure.jpg
-importance: 2
+importance: 3
 category:
 related_publications: false
 ---
