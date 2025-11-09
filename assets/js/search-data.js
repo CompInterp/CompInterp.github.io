@@ -30,6 +30,13 @@ ninja.data = [{
           handler: () => {
             window.location.href = "/resources/";
           },
+        },{id: "nav-repositories",
+          title: "repositories",
+          description: "",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/repositories/";
+          },
         },{id: "news-we-are-presenting-our-poster-at-colorai-aaai-25",
           title: 'We are presenting our poster at CoLoRAI (AAAI’25)!',
           description: "",
@@ -42,7 +49,12 @@ ninja.data = [{
           section: "News",},{id: "news-we-are-presenting-our-work-at-flanders-ai-research-day-hand-over-mouth",
           title: 'We are presenting our work at Flanders AI research day. :hand_over_mouth:',
           description: "",
-          section: "News",},{id: "projects-memetical-compositions",
+          section: "News",},{id: "projects-bilinear-manifolds",
+          title: 'Bilinear Manifolds',
+          description: "Interactive visualisation of manifolds found using bilinear autoencoders",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/bilinear_manifolds/";
+            },},{id: "projects-memetical-compositions",
           title: 'Memetical Compositions',
           description: "Why publish papers when you can compose memes?",
           section: "Projects",handler: () => {
