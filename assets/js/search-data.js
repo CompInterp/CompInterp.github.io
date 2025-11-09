@@ -53,7 +53,7 @@ ninja.data = [{
           title: 'Bilinear Manifolds',
           description: "Interactive visualisation of manifolds found using bilinear autoencoders",
           section: "Projects",handler: () => {
-              window.location.href = "/projects/bilinear_manifolds/";
+              window.location.href = "/bilinear_manifolds/";
             },},{id: "projects-memetical-compositions",
           title: 'Memetical Compositions',
           description: "Why publish papers when you can compose memes?",
