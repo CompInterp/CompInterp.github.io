@@ -1,6 +1,48 @@
 ---
 ---
 
+@misc{dooms_bilinear_2026,
+  abbr={arXiv},
+  title = {Bilinear autoencoders find interpretable manifolds},
+  author = {Dooms*, Thomas and Gauderis*, Ward and Wiggins, Geraint and Oramas, Jose},
+  year = {2026},
+  month = may,
+  eprint = {2605.08891},
+  archivePrefix = {arXiv},
+  primaryClass = {cs.LG},
+  url = {https://arxiv.org/abs/2605.08891},
+  annotation = {These authors contributed equally.},
+  abstract = {Sparse autoencoders have become a standard tool for uncovering interpretable latent representations in neural networks. Yet salient concepts often span manifolds that current linear methods cannot capture without post hoc analysis. This paper uses quadratic latents to close this gap: we implement these with bilinear autoencoders, which decompose activations into low-rank quadratic forms, compose linearly in weight space, and admit input-independent geometric analysis. This qualitative difference in what concepts quadratic latents can detect challenges the standard linear representation hypothesis. Our experiments and visualisations show that multi-dimensional geometries are highly prevalent and that composite latents capture them well, systematically improving reconstruction error in language models. Furthermore, we show that autoencoders with varying geometric priors recover the same input subspace despite their dictionary entries being distinct. Practically, these models serve as an unsupervised tool for manifold discovery, which we demonstrate through an interactive online visualizer for Qwen 3.5. This is a step toward nonlinear but mathematically tractable latent representations whose composition is expressive and interpretable by design.},
+  arxiv = {2605.08891},
+  bibtex_show = {true},
+  html = {https://arxiv.org/abs/2605.08891},
+  pdf = {https://arxiv.org/pdf/2605.08891},
+  website = {https://bae-9xf.pages.dev/},
+  slides = {https://docs.google.com/presentation/d/1mLTv_B0SVncMl8guLxzNgl-ZXV0Pwcx2rC-bnxlgm8Q/edit?usp=sharing},
+  preview = {manifold2.png},
+  selected={true}
+}
+
+@misc{gauderis_compositional_2026,
+  abbr={arXiv},
+  title = {From Mechanistic to Compositional Interpretability},
+  author = {Gauderis*, Ward and Dooms*, Thomas and Holmer, Steven T. and Ayonrinde, Kola and Wiggins, Geraint A.},
+  year = {2026},
+  month = may,
+  eprint = {2605.08934},
+  archivePrefix = {arXiv},
+  primaryClass = {cs.LG},
+  url = {https://arxiv.org/abs/2605.08934},
+  annotation = {These authors contributed equally.},
+  abstract = {Mechanistic interpretability aims to explain neural model behaviour by reverse-engineering learned computational structure into human-understandable components. Without a formal framework, however, mechanistic explanations cannot be objectively verified, compared, or composed. We introduce compositional interpretability, a category-theoretic framework grounded in the principles of compositionality and minimum description length. Compositional interpretations are pairs of syntactic and semantic mappings that must commute to enforce consistency between a model's decomposition and its observed behaviour. We deconstruct explanation quality into measures of faithfulness and complexity to cast interpretability as a constrained optimisation problem, and introduce compressive refinement to systematically restructure models into simpler parts without altering their function. Finally, we prove a parsimony criterion under which syntactic compression theoretically guarantees more concise, human-aligned explanations. Our framework situates prominent mechanistic methods as subclasses of refinement, and clarifies why their compressibility heuristics tend to align with human interpretability. Our work provides a measurable, optimisable foundation for automating the discovery and evaluation of mechanistic explanations.},
+  arxiv = {2605.08934},
+  bibtex_show = {true},
+  html = {https://arxiv.org/abs/2605.08934},
+  pdf = {https://arxiv.org/pdf/2605.08934},
+  preview = {refinement.png},
+  selected={true}
+}
+
 @inproceedings{dooms_bilinear_2025,
   abbr={MI @ NeurIPS},
 	title = {Finding Manifolds With Bilinear Autoencoders},
@@ -16,8 +58,7 @@ This work uses bilinear autoencoders to efficiently decompose representations in
   bibtex_show = {true},
 	html = {https://openreview.net/forum?id=ybJXIh4vcF},
   pdf = {https://openreview.net/pdf?id=ybJXIh4vcF},
-  preview = {manifold.png},
-  selected={true}
+  preview = {manifold.png}
 }
 
 @inproceedings{dooms_compositionality_2024,
