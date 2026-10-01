@@ -31,7 +31,7 @@ Compositional architectures capture rich non-linear (polynomial) relationships b
 This allows for **weight-based** subcircuit analysis, grounding interpretability in formal (de)compositions rather than post-hoc activation-based heuristics.
 
 We're now scaling compositional interpretability to transformers and CNNs by leveraging their low-rank structure through tensor decomposition and information theory.
-Learn more in our [latest talk](https://www.youtube.com/watch?v=yUGZVPJlvzY)!
+Learn more in our [latest talk](https://www.youtube.com/watch?v=7lWLrobBlKI)!
 
 <!-- The **CompInterp** approach to interpretability treats weights and data as a unified modality to provide a compositional perspective on model design, analysis, and manipulation. By combining tensor and neural network paradigms, our $\chi$-nets pave the way for inherently interpretable AI without sacrificing performance.
 

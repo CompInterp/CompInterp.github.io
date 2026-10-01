@@ -5,3 +5,31 @@
 "ICLR":
   url: https://iclr.cc/
   color: "#a0d625"
+
+"arXiv":
+  url: https://arxiv.org
+  color: "#b31b1b"
+
+"MI @ NeurIPS":
+  url: https://mechinterpworkshop.com/
+  color: "#7452ac"
+
+"CompLearn @ ICML":
+  url: https://compositional-learning.github.io/
+  color: "#94d222"
+
+"TPM @ UAI":
+  url: https://tractable-probabilistic-modeling.github.io/tpm2026/
+  color: "#0485f7"
+
+"AIMLAI @ ECML":
+  url: https://project.inria.fr/aimlai/
+  color: "#98e1ff"
+
+"TCS&CC @ ICCC":
+  url: https://computationalcreativity.net/workshops/theorycs-cc-iccc26/
+  color: "#662d8c"
+
+"iDEPOT":
+  url: https://www.boip.int/en/entrepreneurs/ideas/ideas
+  color: "#FFDE62"
